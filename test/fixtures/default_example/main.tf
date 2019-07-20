@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 
-provider "google" {
+provider "random" {
   version = "~> 2.0"
 }
 
-module "example" {
-  source = "../.."
+resource "random_pet" "main" {
+  length    = 1
+  prefix    = "default-example"
+  separator = "-"
+}
 
-  project_id  = var.project_id
-  bucket_name = var.bucket_name
+module "datalab" {
+  source = "../../../examples/basic"
+
+  project_id         = var.project_id
+  bucket_name        = random_pet.main.id
+  datalab_user_email = var.datalab_user_email
 }

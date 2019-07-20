@@ -14,13 +14,27 @@
  * limitations under the License.
  */
 
-provider "google" {
-  version = "~> 2.0"
+output "bucket_name" {
+  description = "The name of the bucket."
+  value       = module.datalab.bucket_name
 }
 
-module "example" {
-  source = "../.."
+output "network_name" {
+  description = "Network name"
+  value       = module.vpc.network_name
+}
 
-  project_id  = var.project_id
-  bucket_name = var.bucket_name
+output "subnet_name" {
+  description = "Subnet name"
+  value       = module.vpc.subnets_self_links[0]
+}
+
+output "router_name" {
+  description = "Google Cloud Router name"
+  value       = google_compute_router.main.name
+}
+
+output "nat_name" {
+  description = "Google Cloud NAT name"
+  value       = google_compute_router_nat.main.name
 }

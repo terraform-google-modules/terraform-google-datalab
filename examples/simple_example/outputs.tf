@@ -16,5 +16,5 @@
 
 output "bucket_name" {
   description = "The name of the bucket."
-  value       = module.datalab.bucket_name
+  value       = module.example.bucket_name
 }

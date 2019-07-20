@@ -26,18 +26,34 @@ platforms:
   - name: default
 
 suites:
-  - name: simple_example
+  # - name: simple_example
+  #   driver:
+  #     root_module_directory: test/fixtures/simple_example/
+    # verifier:
+    #   color: false
+    #   systems:
+    #     - name: simple_example local
+    #       backend: local
+    #       controls:
+    #         - gcloud
+    #         - gsutil
+    #     - name: simple_example gcp
+    #       backend: gcp
+    #       controls:
+    #         - gcp
+  - name: basic
     driver:
-      root_module_directory: test/fixtures/simple_example/
+      root_module_directory: test/fixtures/basic/
     verifier:
       color: false
       systems:
-        - name: simple_example local
+        - name: basic local
           backend: local
           controls:
+            - nat
             - gcloud
-            - gsutil
-        - name: simple_example gcp
+            # - gsutil
+        - name: basic gcp
           backend: gcp
           controls:
             - gcp
