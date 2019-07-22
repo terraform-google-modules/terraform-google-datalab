@@ -10,6 +10,9 @@ attributes:
   - name: region
     required: true
     type: string
+  - name: zone
+    required: true
+    type: string
   - name: bucket_name
     required: true
     type: string
@@ -23,5 +26,17 @@ attributes:
     required: true
     type: string
   - name: nat_name
+    required: true
+    type: string
+  - name: firewall_name
+    required: true
+    type: string
+  - name: disk_name
+    required: true
+    type: string
+  - name: disk_size
+    required: true
+    type: string
+  - name: instance_name
     required: true
     type: string

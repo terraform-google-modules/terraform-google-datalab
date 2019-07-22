@@ -25,8 +25,13 @@ output "project_id" {
 }
 
 output "region" {
-  description = "The ID of the project in which resources are provisioned."
+  description = "Region"
   value       = var.region
+}
+
+output "zone" {
+  description = "Zone"
+  value       = var.zone
 }
 
 output "network_name" {
@@ -49,3 +54,22 @@ output "nat_name" {
   value       = module.datalab.nat_name
 }
 
+output "firewall_name" {
+  description = "The name of the firewall rule"
+  value       = module.datalab.firewall_name
+}
+
+output "disk_name" {
+  description = "The name of the persistent disk"
+  value       = module.datalab.disk_name
+}
+
+output "disk_size" {
+  description = "The size of the persistent disk"
+  value       = module.datalab.disk_size
+}
+
+output "instance_name" {
+  description = "The instance name"
+  value       = module.datalab.instance_name
+}

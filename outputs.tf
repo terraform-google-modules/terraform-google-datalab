@@ -17,3 +17,23 @@
 output "bucket_name" {
   value = google_storage_bucket.main.name
 }
+
+output "zone" {
+  value = var.zone
+}
+
+output "firewall_name" {
+  value = google_compute_firewall.main.name
+}
+
+output "disk_name" {
+  value = google_compute_disk.main.0.name
+}
+
+output "disk_size" {
+  value = var.persistent_disk_size_gb
+}
+
+output "instance_name" {
+  value = google_compute_instance.main.name
+}

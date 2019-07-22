@@ -15,7 +15,7 @@
  */
 
 output "bucket_name" {
-  description = "The name of the bucket."
+  description = "The name of the bucket"
   value       = module.datalab.bucket_name
 }
 
@@ -37,4 +37,24 @@ output "router_name" {
 output "nat_name" {
   description = "Google Cloud NAT name"
   value       = google_compute_router_nat.main.name
+}
+
+output "firewall_name" {
+  description = "The name of the firewall rule"
+  value       = module.datalab.firewall_name
+}
+
+output "disk_name" {
+  description = "The name of the persistent disk"
+  value       = module.datalab.disk_name
+}
+
+output "disk_size" {
+  description = "The size of the persistent disk"
+  value       = module.datalab.disk_size
+}
+
+output "instance_name" {
+  description = "The instance name"
+  value       = module.datalab.instance_name
 }

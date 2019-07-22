@@ -18,19 +18,15 @@ provider "google" {
   version = "~> 2.0"
 }
 
-module "datalab" {
-  source = "../.."
-
-  project_id  = var.project_id
-  bucket_name = var.bucket_name
-}
-
 locals {
-  network_name = "${var.network_name}-default"
+  network_name = "${var.network_name}-basic"
   subnet_name  = "${local.network_name}-subnet"
   subnet_ip    = "10.10.10.0/24"
 }
 
+/******************************************
+  Create VPC
+ *****************************************/
 module "vpc" {
   source       = "terraform-google-modules/network/google"
   version      = "~> 1.0.0"
@@ -50,8 +46,12 @@ module "vpc" {
   }
 }
 
+/******************************************
+  Adding Cloud NAT
+ *****************************************/
+
 resource "google_compute_router" "main" {
-  name    = "${local.network_name}-router"
+  name    = "${module.vpc.network_name}-router"
   project = var.project_id
   region  = var.region
   network = module.vpc.network_self_link
@@ -61,8 +61,11 @@ resource "google_compute_router" "main" {
   }
 }
 
+/******************************************
+  Adding Cloud Router
+ *****************************************/
 resource "google_compute_router_nat" "main" {
-  name                               = "${local.network_name}-nat"
+  name                               = "${module.vpc.network_name}-nat"
   router                             = google_compute_router.main.name
   project                            = var.project_id
   region                             = var.region
@@ -74,4 +77,33 @@ resource "google_compute_router_nat" "main" {
     source_ip_ranges_to_nat = ["ALL_IP_RANGES"]
   }
 
+}
+
+module "datalab" {
+  source             = "../.."
+  project_id         = var.project_id
+  bucket_name        = var.bucket_name
+  network_name       = module.vpc.network_name
+  subnet_name        = module.vpc.subnets_self_links[0]
+  name               = var.name
+  zone               = var.zone
+  datalab_user_email = var.datalab_user_email
+
+
+  # gpu_type                  = "${var.gpu_type}"
+  # gpu_count                 = "${var.gpu_count}"
+  # datalab_gpu_docker_image  = "${var.datalab_gpu_docker_image}"
+  # name                      = "${var.name}"
+  # zone                      = "${var.zone}"
+  # service_account           = "${var.service_account}"
+  # network_name              = "${module.vpc.subnets_self_links[0]}"
+  # machine_type              = "${var.machine_type}"
+  # boot_disk_size_gb         = "${var.boot_disk_size_gb}"
+  # persistent_disk_size_gb   = "${var.persistent_disk_size_gb}"
+  # datalab_enable_swap       = "${var.datalab_enable_swap}"
+  # datalab_enable_backup     = "${var.datalab_enable_backup}"
+  # datalab_console_log_level = "${var.datalab_console_log_level}"
+  # datalab_user_email        = "${var.datalab_user_email}"
+  # datalab_idle_timeout      = "${var.datalab_idle_timeout}"
+  # fluentd_docker_image      = "${var.fluentd_docker_image}"
 }

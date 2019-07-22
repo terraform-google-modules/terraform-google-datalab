@@ -12,18 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#gcloud compute routers describe datalab-network-default-router --project boblee-test-225418 --region us-central1
-#gcloud --project boblee-test-225418 compute routers nats describe datalab-network-default-nat --router datalab-network-default-router --region us-central1 --format json
-
 project_id = attribute('project_id')
 region = attribute('region')
+zone = attribute('zone')
 router_name = attribute('router_name')
 nat_name = attribute('nat_name')
 subnet_name = attribute('subnet_name')
+instance_name = attribute('instance_name')
 
-control "nat" do
+control "gcloud" do
   title "Google Compute NAT configuration"
-  describe command("gcloud --project #{project_id} compute routers nats describe #{nat_name} --router #{router_name} --router-region #{region} --format json") do
+  describe command("gcloud --project #{project_id} compute routers nats describe #{nat_name} \
+  --router #{router_name} --router-region #{region} --format json") do
     its(:exit_status) { should eq 0 }
     its(:stderr) { should eq '' }
 
@@ -57,14 +57,10 @@ control "nat" do
 
     end
   end
-end
 
-control "gcloud" do
-  title "gcloud"
-
-  describe command("gcloud --project=#{attribute("project_id")} services list --enabled") do
-    its(:exit_status) { should eq 0 }
-    its(:stderr) { should eq "" }
-    its(:stdout) { should match "storage-api.googleapis.com" }
+  title "Test Web UI access"
+  describe command("timeout 5s gcloud beta compute start-iap-tunnel #{instance_name} 8080 \
+  --project #{project_id} --zone #{zone} --local-host-port=localhost:8080") do
+    its('stdout') { should match (/Listening on port \[8080\]/) }
   end
 end
