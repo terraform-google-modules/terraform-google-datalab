@@ -19,7 +19,7 @@ provider "google" {
 }
 
 locals {
-  network_name = "${var.network_name}-basic"
+  network_name = "${var.network_name}-advance"
   subnet_name  = "${local.network_name}-subnet"
   subnet_ip    = "10.10.10.0/24"
 }
@@ -79,12 +79,40 @@ resource "google_compute_router_nat" "main" {
 
 }
 
+/******************************************
+  Create Service account
+ *****************************************/
+resource "google_service_account" "main" {
+  project      = var.project_id
+  account_id   = "datalab"
+  display_name = "datalab"
+}
+
+resource "google_project_iam_member" "main" {
+  project    = var.project_id
+  role       = "roles/compute.instanceAdmin"
+  member     = "serviceAccount:${google_service_account.main.email}"
+}
+
 module "datalab" {
-  source             = "../.."
-  project_id         = var.project_id
-  name               = var.name
-  zone               = var.zone
-  datalab_user_email = var.datalab_user_email
-  network_name       = module.vpc.network_name
-  subnet_name        = module.vpc.subnets_self_links[0]
+  source                    = "../.."
+  project_id                = var.project_id
+  name                      = "${var.name}-gpu"
+  zone                      = var.zone
+  datalab_user_email        = var.datalab_user_email
+  network_name              = module.vpc.network_name
+  subnet_name               = module.vpc.subnets_self_links[0]
+  service_account           = google_service_account.main.email
+  machine_type              = var.machine_type
+  boot_disk_size_gb         = var.boot_disk_size_gb
+  persistent_disk_size_gb   = var.persistent_disk_size_gb
+  gpu_type                  = var.gpu_type
+  gpu_count                 = var.gpu_count
+  datalab_docker_image      = var.datalab_docker_image
+  datalab_gpu_docker_image  = var.datalab_gpu_docker_image
+  fluentd_docker_image      = var.fluentd_docker_image
+  datalab_enable_swap       = var.datalab_enable_swap
+  datalab_enable_backup     = var.datalab_enable_backup
+  datalab_console_log_level = var.datalab_console_log_level
+  datalab_idle_timeout      = var.datalab_idle_timeout
 }

@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-output "bucket_name" {
-  description = "The name of the bucket."
-  value       = module.example.bucket_name
+provider "random" {
+  version = "~> 2.0"
 }
 
-output "project_id" {
-  description = "The ID of the project in which resources are provisioned."
-  value       = var.project_id
+module "datalab" {
+  source             = "../../../examples/advance"
+  project_id         = var.project_id
+  datalab_user_email = var.datalab_user_email
 }

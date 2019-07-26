@@ -18,16 +18,8 @@ provider "random" {
   version = "~> 2.0"
 }
 
-resource "random_pet" "main" {
-  length    = 1
-  prefix    = "default-example"
-  separator = "-"
-}
-
 module "datalab" {
-  source = "../../../examples/basic"
-
+  source             = "../../../examples/basic"
   project_id         = var.project_id
-  bucket_name        = random_pet.main.id
   datalab_user_email = var.datalab_user_email
 }

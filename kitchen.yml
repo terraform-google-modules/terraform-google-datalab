@@ -26,21 +26,20 @@ platforms:
   - name: default
 
 suites:
-  # - name: simple_example
-  #   driver:
-  #     root_module_directory: test/fixtures/simple_example/
-    # verifier:
-    #   color: false
-    #   systems:
-    #     - name: simple_example local
-    #       backend: local
-    #       controls:
-    #         - gcloud
-    #         - gsutil
-    #     - name: simple_example gcp
-    #       backend: gcp
-    #       controls:
-    #         - gcp
+  - name: advance
+    driver:
+      root_module_directory: test/fixtures/advance/
+    verifier:
+      color: false
+      systems:
+        - name: aaaaadvance local
+          backend: local
+          controls:
+            - gcloud
+        - name: advance gcp
+          backend: gcp
+          controls:
+            - gcp
   - name: basic
     driver:
       root_module_directory: test/fixtures/basic/

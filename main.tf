@@ -18,11 +18,6 @@ terraform {
   required_version = "~> 0.12.0"
 }
 
-resource "google_storage_bucket" "main" {
-  project = var.project_id
-  name    = var.bucket_name
-}
-
 locals {
   # datalab_partial      = data.template_file.datalab_partial.rendered
   # datalab_gpu_partial  = data.template_file.datalab_gpu_partial.rendered

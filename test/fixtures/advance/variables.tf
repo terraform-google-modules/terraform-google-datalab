@@ -16,7 +16,6 @@
 
 variable "project_id" {
   description = "The ID of the project in which to provision resources."
-  type        = string
 }
 
 variable "name" {
@@ -55,7 +54,7 @@ variable "persistent_disk_size_gb" {
 
 variable "gpu_count" {
   description = "Valid values are: 0, 1, 2, 4, 8"
-  default     = 1
+  default     = 0
 }
 
 variable "gpu_type" {

@@ -18,10 +18,6 @@ variable "project_id" {
   description = "The project ID to deploy to"
 }
 
-variable "bucket_name" {
-  description = "The name of the bucket to create"
-}
-
 variable "name" {
   type = "string"
 }
@@ -117,33 +113,33 @@ variable "fluentd_docker_image" {
 }
 
 variable "systemctl_gpu" {
-  default = <<EOT
+  default = <<EOF
 - systemctl enable cos-gpu-installer.service
 - systemctl start cos-gpu-installer.service
-EOT
+EOF
 }
 
 variable gpu_device_map {
   default = {
     gpu_device_0 = ""
 
-    gpu_device_1 = <<EOT
+    gpu_device_1 = <<EOF
        --device /dev/nvidia0:/dev/nvidia0 \
-       EOT
+       EOF
 
-    gpu_device_2 = <<EOT
+    gpu_device_2 = <<EOF
        --device /dev/nvidia0:/dev/nvidia0 \
        --device /dev/nvidia1:/dev/nvidia1 \
-       EOT
+       EOF
 
-    gpu_device_4 = <<EOT
+    gpu_device_4 = <<EOF
        --device /dev/nvidia0:/dev/nvidia0 \
        --device /dev/nvidia1:/dev/nvidia1 \
        --device /dev/nvidia2:/dev/nvidia2 \
        --device /dev/nvidia3:/dev/nvidia3 \
-       EOT
+       EOF
 
-    gpu_device_8 = <<EOT
+    gpu_device_8 = <<EOF
        --device /dev/nvidia0:/dev/nvidia0 \
        --device /dev/nvidia1:/dev/nvidia1 \
        --device /dev/nvidia2:/dev/nvidia2 \
@@ -152,6 +148,6 @@ variable gpu_device_map {
        --device /dev/nvidia5:/dev/nvidia5 \
        --device /dev/nvidia6:/dev/nvidia6 \
        --device /dev/nvidia7:/dev/nvidia7 \
-       EOT
+       EOF
   }
 }

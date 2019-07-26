@@ -56,8 +56,7 @@
        -v /mnt/disks/datalab-pd/content:/content \
        -v /mnt/disks/datalab-pd/tmp:/tmp \
        --volume /var/lib/nvidia:/usr/local/nvidia \
-${gpu_device}
-       --device /dev/nvidia-uvm:/dev/nvidia-uvm \
+${gpu_device}       --device /dev/nvidia-uvm:/dev/nvidia-uvm \
        --device /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools \
        --device /dev/nvidiactl:/dev/nvidiactl \
        --env=HOME=/content \

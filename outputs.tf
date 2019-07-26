@@ -14,14 +14,6 @@
  * limitations under the License.
  */
 
-output "bucket_name" {
-  value = google_storage_bucket.main.name
-}
-
-output "zone" {
-  value = var.zone
-}
-
 output "firewall_name" {
   value = google_compute_firewall.main.name
 }
