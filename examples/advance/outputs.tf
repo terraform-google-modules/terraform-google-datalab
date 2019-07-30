@@ -53,3 +53,14 @@ output "instance_name" {
   description = "The instance name"
   value       = module.datalab.instance_name
 }
+
+
+output "gpu_count" {
+  description = "Number of gpus"
+  value       = var.gpu_count
+}
+
+output "gpu_type" {
+  description = "The gpu type"
+  value       = var.gpu_type
+}

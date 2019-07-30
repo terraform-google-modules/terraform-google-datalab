@@ -19,8 +19,6 @@ terraform {
 }
 
 locals {
-  # datalab_partial      = data.template_file.datalab_partial.rendered
-  # datalab_gpu_partial  = data.template_file.datalab_gpu_partial.rendered
   datalab_docker_image = var.gpu_count == "0" ? var.datalab_docker_image : var.datalab_gpu_docker_image
   datalab_disk_name    = "${var.name}-pd"
 }
@@ -89,7 +87,6 @@ data "template_file" "datalab_gpu_partial" {
     datalab_user_email        = var.datalab_user_email
     datalab_idle_timeout      = var.datalab_idle_timeout
     gpu_device                = var.gpu_device_map["gpu_device_${var.gpu_count}"]
-    # gpu_device                = "${lookup(var.gpu_device_map, "gpu_device_${var.gpu_count}")}"
   }
 }
 
@@ -100,8 +97,6 @@ data "template_file" "cloud_config" {
   template = "${file("${path.module}/templates/cloud_config.tpl")}"
 
   vars = {
-    # datalab_partial      = var.gpu_count == "0" ? local.datalab_partial : ""
-    # datalab_gpu_partial  = var.gpu_count == "0" ? "" : local.datalab_gpu_partial
     datalab_partial     = var.gpu_count == "0" ? data.template_file.datalab_partial.rendered : ""
     datalab_gpu_partial = var.gpu_count == "0" ? "" : data.template_file.datalab_gpu_partial.rendered
 
@@ -118,7 +113,7 @@ resource "google_compute_instance" "main" {
   project                   = var.project_id
   machine_type              = var.machine_type
   zone                      = var.zone
-  allow_stopping_for_update = var.allow_stopping_for_update
+  allow_stopping_for_update = true
 
   tags = ["datalab"]
 

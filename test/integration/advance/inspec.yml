@@ -40,3 +40,8 @@ attributes:
   - name: instance_name
     required: true
     type: string
+  - name: gpu_count
+    required: true
+  - name: gpu_type
+    required: true
+    type: string

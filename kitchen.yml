@@ -32,10 +32,11 @@ suites:
     verifier:
       color: false
       systems:
-        - name: aaaaadvance local
+        - name: advance local
           backend: local
           controls:
             - gcloud
+            - gpu
         - name: advance gcp
           backend: gcp
           controls:
