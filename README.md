@@ -94,7 +94,7 @@ If using the examples you will need these additional roles.
 - Compute Network Admin: `roles/compute.networkAdmin` (create VPC)
 
 Advance Example
-- Create Service Accounts: `roles/iam.serviceAccountCreator` (create service account)
+- Service Account Admin: `roles/iam.serviceAccountAdmin` (create service account)
 - Projects IAM Admin: `roles/resourcemanager.projectIamAdmin` (set IAM policy on project)
 
 ### Service Account for instance
