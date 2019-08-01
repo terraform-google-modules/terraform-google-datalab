@@ -14,24 +14,40 @@
  * limitations under the License.
  */
 
+
+output "project_id" {
+  description = "The ID of the project in which resources are provisioned."
+  value       = var.project_id
+}
+
+output "region" {
+  description = "Region"
+  value       = var.region
+}
+
+output "zone" {
+  description = "Zone"
+  value       = var.zone
+}
+
 output "network_name" {
   description = "Network name"
-  value       = module.vpc.network_name
+  value       = module.datalab.network_name
 }
 
 output "subnet_name" {
   description = "Subnet name"
-  value       = module.vpc.subnets_self_links[0]
+  value       = module.datalab.subnet_name
 }
 
 output "router_name" {
   description = "Google Cloud Router name"
-  value       = google_compute_router.main.name
+  value       = module.datalab.router_name
 }
 
 output "nat_name" {
   description = "Google Cloud NAT name"
-  value       = google_compute_router_nat.main.name
+  value       = module.datalab.nat_name
 }
 
 output "firewall_name" {
@@ -52,15 +68,4 @@ output "disk_size" {
 output "instance_name" {
   description = "The instance name"
   value       = module.datalab.instance_name
-}
-
-
-output "gpu_count" {
-  description = "Number of gpus"
-  value       = var.gpu_count
-}
-
-output "gpu_type" {
-  description = "The gpu type"
-  value       = var.gpu_type
 }

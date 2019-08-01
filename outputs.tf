@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,21 @@
  */
 
 output "firewall_name" {
-  value = google_compute_firewall.main.name
+  description = "The name of the firewall rule"
+  value       = google_compute_firewall.main.name
 }
 
 output "disk_name" {
-  value = google_compute_disk.main.0.name
+  description = "The name of the persistent disk"
+  value       = google_compute_disk.main.0.name
 }
 
 output "disk_size" {
-  value = var.persistent_disk_size_gb
+  description = "The size of the persistent disk"
+  value       = var.persistent_disk_size_gb
 }
 
 output "instance_name" {
-  value = google_compute_instance.main.name
+  description = "The instance name"
+  value       = google_compute_instance.main.name
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ locals {
  *****************************************/
 module "vpc" {
   source       = "terraform-google-modules/network/google"
-  version      = "~> 1.0.0"
+  version      = "~> 1.1.0"
   project_id   = var.project_id
   network_name = local.network_name
 

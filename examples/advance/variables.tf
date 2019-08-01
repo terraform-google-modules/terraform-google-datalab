@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ variable "network_name" {
 }
 
 variable "service_account" {
-  description = "The service account attached to the Datalab instance"
+  description = "The service account attached to the Datalab instance. If empty the default Google Compute Engine service account is used"
   default     = ""
 }
 
@@ -89,12 +89,8 @@ variable "datalab_enable_backup" {
 }
 
 variable "datalab_console_log_level" {
-  description = <<EOF
-The log level for which log entries from the Datalab instance will be written
-to StackDriver logging. Valid choices: (trace,debug,info,warn,error,fatal)
-EOF
-
-  default = "warn"
+  description = "The log level for which log entries from the Datalab instance will be written to StackDriver logging. Valid choices: (trace,debug,info,warn,error,fatal)"
+  default     = "warn"
 }
 
 variable "datalab_user_email" {
@@ -102,13 +98,8 @@ variable "datalab_user_email" {
 }
 
 variable "datalab_idle_timeout" {
-  description = <<EOF
-Interval after which an idle Datalab instance will shut down.
-You can specify a mix of days, hours, minutes and seconds using those names
-or d, h, m and s, for example 1h 30m. Specify 0s to disable.
-EOF
-
-  default = "60m"
+  description = "Interval after which an idle Datalab instance will shut down. You can specify a mix of days, hours, minutes and seconds using those names or d, h, m and s, for example 1h 30m. Specify 0s to disable"
+  default     = "60m"
 }
 
 variable "fluentd_docker_image" {
