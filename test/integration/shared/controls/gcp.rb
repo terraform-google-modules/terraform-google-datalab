@@ -27,14 +27,6 @@ instance_name = attribute('instance_name')
 control "gcp" do
   title "GCP Resources"
 
-  describe google_compute_router(project: "#{project_id}", region: "#{region}", name: "#{router_name}") do
-    it { should exist }
-    its('bgp.asn') { should eq (64514) }
-    its('bgp.advertise_mode') { should eq 'DEFAULT' }
-    its('network') { should match "#{network_name}" }
-    its('region') { should match "#{region}" }
-    end
-
   describe google_compute_firewall(project: "#{project_id}", name: "#{firewall_name}") do
     it { should exist }
     its('name') { should eq "#{firewall_name}" }

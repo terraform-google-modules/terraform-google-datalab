@@ -14,22 +14,25 @@
  * limitations under the License.
  */
 
-output "firewall_name" {
-  description = "The name of the firewall rule"
-  value       = google_compute_firewall.main.name
+variable "project_id" {
+  description = "The project ID used for the Datalab instance"
 }
 
-output "disk_name" {
-  description = "The name of the persistent disk"
-  value       = google_compute_disk.main.0.name
+variable "network_name" {
+  description = "The network the Datalab instance will be in"
 }
 
-output "disk_size" {
-  description = "The size of the persistent disk"
-  value       = var.persistent_disk_size_gb
+variable "firewall_description" {
+  description = "Description for firewall rule"
+  default     = "Allow IAP access"
 }
 
-output "instance_name" {
-  description = "The instance name"
-  value       = google_compute_instance.main.name
+variable "target_tags" {
+  description = "A list of instance tags indicating sets of instances located in the network that may make network connections as specified"
+  type        = list
+}
+
+variable "ports" {
+  description = "A list of ports to which this rule applies"
+  type        = list
 }

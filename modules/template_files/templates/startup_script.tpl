@@ -88,11 +88,11 @@ checked_format_disk() {
   if [ -z "$(blkid $${PERSISTENT_DISK_DEV})" ]; then
     format_disk
   else
-    echo "Disk already formatted, but mounting failed; rebooting..."
+    echo "Disk already formatted, but mounting failed"
 
     # The mount failed, but the disk seems to already
-    # be formatted. Reboot the machine to try again.
-    reboot now
+    # be formatted.
+    exit 1
   fi
 }
 
@@ -102,8 +102,8 @@ mount_and_prepare_disk() {
   $${MOUNT_CMD} || checked_format_disk
 
   if [ -z "$(mount | grep $${MOUNT_DIR})" ]; then
-    echo "Failed to mount the persistent disk; rebooting..."
-    reboot now
+    echo "Failed to mount the persistent disk;"
+    exit 1
   fi
 
   chmod a+w "$${MOUNT_DIR}"

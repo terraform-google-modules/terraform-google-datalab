@@ -79,8 +79,11 @@ resource "google_compute_router_nat" "main" {
 
 }
 
+/******************************************
+  Create a default Datalab instance
+ *****************************************/
 module "datalab" {
-  source             = "../.."
+  source             = "../../modules/default_instance"
   project_id         = var.project_id
   name               = var.name
   zone               = var.zone

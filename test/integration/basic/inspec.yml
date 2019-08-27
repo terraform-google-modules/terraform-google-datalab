@@ -36,7 +36,6 @@ attributes:
     type: string
   - name: disk_size
     required: true
-    type: string
   - name: instance_name
     required: true
     type: string

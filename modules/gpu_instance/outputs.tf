@@ -14,57 +14,27 @@
  * limitations under the License.
  */
 
-output "network_name" {
-  description = "Network name"
-  value       = module.vpc.network_name
-}
-
-output "subnet_name" {
-  description = "Subnet name"
-  value       = module.vpc.subnets_self_links[0]
-}
-
-output "router_name" {
-  description = "Google Cloud Router name"
-  value       = google_compute_router.main.name
-}
-
-output "nat_name" {
-  description = "Google Cloud NAT name"
-  value       = google_compute_router_nat.main.name
-}
-
 output "firewall_name" {
   description = "The name of the firewall rule"
-  value       = module.datalab.firewall_name
+  value       = module.iap_firewall.firewall_name
 }
 
 output "disk_name" {
   description = "The name of the persistent disk"
-  value       = module.datalab.disk_name
+  value       = google_compute_disk.main.0.name
 }
 
 output "disk_size" {
   description = "The size of the persistent disk"
-  value       = module.datalab.disk_size
+  value       = google_compute_disk.main.0.size
 }
 
 output "instance_name" {
   description = "The instance name"
-  value       = module.datalab.instance_name
+  value       = google_compute_instance.main.name
 }
 
 output "datalab_docker_image" {
-  description = "The datalab docker image used"
-  value       = module.datalab.datalab_docker_image
-}
-
-output "gpu_count" {
-  description = "Number of gpus"
-  value       = var.gpu_count
-}
-
-output "gpu_type" {
-  description = "The gpu type"
-  value       = var.gpu_type
+  description = "The Datalab docker image used"
+  value       = var.datalab_docker_image
 }

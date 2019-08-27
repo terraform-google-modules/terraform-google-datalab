@@ -40,7 +40,7 @@ variable "network_name" {
 
 variable "service_account" {
   description = "The service account attached to the Datalab instance. If empty the default Google Compute Engine service account is used"
-  default     = ""
+  default     = null
 }
 
 variable "machine_type" {
@@ -50,17 +50,20 @@ variable "machine_type" {
 
 variable "boot_disk_size_gb" {
   description = "The boot disk size in gb for the Datalab instance"
-  default     = "20"
+  type        = number
+  default     = 20
 }
 
 variable "persistent_disk_size_gb" {
   description = "The persistent disk size in gb for the Datalab instance"
-  default     = "200"
+  type        = number
+  default     = 200
 }
 
 variable "gpu_count" {
   description = "Number of GPUs for the Datalab instance. Valid values are: 0, 1, 2, 4, 8"
-  default     = 1
+  type        = number
+  default     = 0
 }
 
 variable "gpu_type" {
@@ -80,12 +83,14 @@ variable "datalab_gpu_docker_image" {
 
 variable "datalab_enable_swap" {
   description = "Enable swap on the Datalab instance"
-  default     = "true"
+  type        = bool
+  default     = true
 }
 
 variable "datalab_enable_backup" {
   description = "Automatically backup the disk contents to Cloud Storage"
-  default     = "true"
+  type        = bool
+  default     = true
 }
 
 variable "datalab_console_log_level" {

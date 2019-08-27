@@ -37,7 +37,7 @@ variable "subnet_name" {
 
 variable "service_account" {
   description = "The service account attached to the Datalab instance. If empty the default Google Compute Engine service account is used"
-  default     = ""
+  default     = null
 }
 
 variable "machine_type" {
@@ -47,47 +47,30 @@ variable "machine_type" {
 
 variable "boot_disk_size_gb" {
   description = "The boot disk size in gb for the Datalab instance"
-  default     = "20"
+  default     = 20
 }
 
 variable "persistent_disk_size_gb" {
   description = "The persistent disk size in gb for the Datalab instance"
-  default     = "200"
+  type        = number
+  default     = 200
 }
 
 variable "existing_disk_name" {
   description = "Name of an existing persistent disk you want to use"
-  default     = ""
-}
-
-variable "gpu_count" {
-  description = "Number of GPUs for the Datalab instance. Valid values are: 0, 1, 2, 4, 8"
-  default     = 0
-}
-
-variable "gpu_type" {
-  description = "The GPU type for the Datalab instance"
-  default     = "nvidia-tesla-k80"
-}
-
-variable "datalab_docker_image" {
-  description = "Datalab docker image to use"
-  default     = "gcr.io/cloud-datalab/datalab:latest"
-}
-
-variable "datalab_gpu_docker_image" {
-  description = "Datalab GPU docker image to use"
-  default     = "gcr.io/cloud-datalab/datalab-gpu:latest"
+  default     = null
 }
 
 variable "datalab_enable_swap" {
   description = "Enable swap on the Datalab instance"
-  default     = "true"
+  type        = bool
+  default     = true
 }
 
 variable "datalab_enable_backup" {
   description = "Automatically backup the disk contents to Cloud Storage"
-  default     = "true"
+  type        = bool
+  default     = true
 }
 
 variable "datalab_console_log_level" {
@@ -109,42 +92,22 @@ variable "fluentd_docker_image" {
   default     = "gcr.io/google-containers/fluentd-gcp:2.0.17"
 }
 
-variable "systemctl_gpu" {
-  default = <<EOF
-- systemctl enable cos-gpu-installer.service
-- systemctl start cos-gpu-installer.service
-EOF
+variable "datalab_docker_image" {
+  description = "Datalab docker image to use"
+  default     = "gcr.io/cloud-datalab/datalab-gpu:latest"
 }
 
-variable gpu_device_map {
-  default = {
-    gpu_device_0 = ""
+variable "cloud_config" {
+  description = "The cloud config template to use"
+  default     = "gpu_cloud_config.tpl"
+}
 
-    gpu_device_1 = <<EOF
-       --device /dev/nvidia0:/dev/nvidia0 \
-       EOF
+variable "gpu_count" {
+  description = "Number of GPUs for the Datalab instance. Valid values are: 0, 1, 2, 4, 8"
+  default     = 0
+}
 
-    gpu_device_2 = <<EOF
-       --device /dev/nvidia0:/dev/nvidia0 \
-       --device /dev/nvidia1:/dev/nvidia1 \
-       EOF
-
-    gpu_device_4 = <<EOF
-       --device /dev/nvidia0:/dev/nvidia0 \
-       --device /dev/nvidia1:/dev/nvidia1 \
-       --device /dev/nvidia2:/dev/nvidia2 \
-       --device /dev/nvidia3:/dev/nvidia3 \
-       EOF
-
-    gpu_device_8 = <<EOF
-       --device /dev/nvidia0:/dev/nvidia0 \
-       --device /dev/nvidia1:/dev/nvidia1 \
-       --device /dev/nvidia2:/dev/nvidia2 \
-       --device /dev/nvidia3:/dev/nvidia3 \
-       --device /dev/nvidia4:/dev/nvidia4 \
-       --device /dev/nvidia5:/dev/nvidia5 \
-       --device /dev/nvidia6:/dev/nvidia6 \
-       --device /dev/nvidia7:/dev/nvidia7 \
-       EOF
-  }
+variable "gpu_type" {
+  description = "The GPU type for the Datalab instance"
+  default     = "nvidia-tesla-k80"
 }

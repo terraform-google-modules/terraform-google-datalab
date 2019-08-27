@@ -94,8 +94,11 @@ resource "google_project_iam_member" "main" {
   member  = "serviceAccount:${google_service_account.main.email}"
 }
 
+/******************************************
+  Create a GPU Datalab instance
+ *****************************************/
 module "datalab" {
-  source                    = "../.."
+  source                    = "../../modules/gpu_instance"
   project_id                = var.project_id
   name                      = "${var.name}-gpu"
   zone                      = var.zone
@@ -108,8 +111,7 @@ module "datalab" {
   persistent_disk_size_gb   = var.persistent_disk_size_gb
   gpu_type                  = var.gpu_type
   gpu_count                 = var.gpu_count
-  datalab_docker_image      = var.datalab_docker_image
-  datalab_gpu_docker_image  = var.datalab_gpu_docker_image
+  datalab_docker_image      = var.datalab_gpu_docker_image
   fluentd_docker_image      = var.fluentd_docker_image
   datalab_enable_swap       = var.datalab_enable_swap
   datalab_enable_backup     = var.datalab_enable_backup

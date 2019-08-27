@@ -23,19 +23,16 @@ variable "name" {
   default     = "datalab"
 }
 
-variable "region" {
-  description = "The region the network will be created in"
-  default     = "us-central1"
-}
-
 variable "zone" {
   description = "The zone the Datalab instance will be deployed to"
-  default     = "us-central1-c"
 }
 
 variable "network_name" {
-  description = "The name of the VPC network being created"
-  default     = "datalab-network"
+  description = "The network the Datalab instance will be in"
+}
+
+variable "subnet_name" {
+  description = "The subnet the Datalab instance will be in"
 }
 
 variable "service_account" {
@@ -50,7 +47,6 @@ variable "machine_type" {
 
 variable "boot_disk_size_gb" {
   description = "The boot disk size in gb for the Datalab instance"
-  type        = number
   default     = 20
 }
 
@@ -60,25 +56,9 @@ variable "persistent_disk_size_gb" {
   default     = 200
 }
 
-variable "gpu_count" {
-  description = "Number of GPUs for the Datalab instance. Valid values are: 0, 1, 2, 4, 8"
-  type        = number
-  default     = 2
-}
-
-variable "gpu_type" {
-  description = "The GPU type for the Datalab instance"
-  default     = "nvidia-tesla-k80"
-}
-
-variable "datalab_docker_image" {
-  description = "Datalab docker image to use"
-  default     = "gcr.io/cloud-datalab/datalab:latest"
-}
-
-variable "datalab_gpu_docker_image" {
-  description = "Datalab GPU docker image to use"
-  default     = "gcr.io/cloud-datalab/datalab-gpu:latest"
+variable "existing_disk_name" {
+  description = "Name of an existing persistent disk you want to use"
+  default     = null
 }
 
 variable "datalab_enable_swap" {
@@ -110,4 +90,14 @@ variable "datalab_idle_timeout" {
 variable "fluentd_docker_image" {
   description = "Fluentd docker image to use"
   default     = "gcr.io/google-containers/fluentd-gcp:2.0.17"
+}
+
+variable "datalab_docker_image" {
+  description = "Datalab docker image to use"
+  default     = "gcr.io/cloud-datalab/datalab:latest"
+}
+
+variable "cloud_config" {
+  description = "The cloud config template to use"
+  default     = "default_cloud_config.tpl"
 }
