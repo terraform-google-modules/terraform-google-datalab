@@ -63,7 +63,7 @@ variable "persistent_disk_size_gb" {
 variable "gpu_count" {
   description = "Number of GPUs for the Datalab instance. Valid values are: 0, 1, 2, 4, 8"
   type        = number
-  default     = 2
+  default     = 1
 }
 
 variable "gpu_type" {
