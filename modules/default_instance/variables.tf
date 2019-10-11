@@ -56,6 +56,12 @@ variable "persistent_disk_size_gb" {
   default     = 200
 }
 
+variable "create_disk" {
+  description = "Create a persistent data disk"
+  type        = bool
+  default     = true
+}
+
 variable "existing_disk_name" {
   description = "Name of an existing persistent disk you want to use"
   default     = null
@@ -95,9 +101,4 @@ variable "fluentd_docker_image" {
 variable "datalab_docker_image" {
   description = "Datalab docker image to use"
   default     = "gcr.io/cloud-datalab/datalab:latest"
-}
-
-variable "cloud_config" {
-  description = "The cloud config template to use"
-  default     = "default_cloud_config.tpl"
 }

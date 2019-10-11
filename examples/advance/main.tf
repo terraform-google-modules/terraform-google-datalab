@@ -47,7 +47,7 @@ module "vpc" {
 }
 
 /******************************************
-  Adding Cloud NAT
+  Adding Cloud Router
  *****************************************/
 
 resource "google_compute_router" "main" {
@@ -62,7 +62,7 @@ resource "google_compute_router" "main" {
 }
 
 /******************************************
-  Adding Cloud Router
+  Adding Cloud NAT
  *****************************************/
 resource "google_compute_router_nat" "main" {
   name                               = "${module.vpc.network_name}-nat"
@@ -108,6 +108,7 @@ module "datalab" {
   service_account           = google_service_account.main.email
   machine_type              = var.machine_type
   boot_disk_size_gb         = var.boot_disk_size_gb
+  create_disk               = true
   persistent_disk_size_gb   = var.persistent_disk_size_gb
   gpu_type                  = var.gpu_type
   gpu_count                 = var.gpu_count

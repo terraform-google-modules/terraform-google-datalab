@@ -33,8 +33,3 @@ output "instance_name" {
   description = "The instance name"
   value       = google_compute_instance.main.name
 }
-
-output "datalab_docker_image" {
-  description = "The Datalab docker image used"
-  value       = var.datalab_docker_image
-}

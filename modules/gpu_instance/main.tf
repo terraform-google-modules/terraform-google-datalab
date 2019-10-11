@@ -35,7 +35,7 @@ module "iap_firewall" {
  ***********************************************/
 module "template_files" {
   source                    = "../template_files"
-  cloud_config              = var.cloud_config
+  cloud_config              = "gpu_cloud_config.tpl"
   datalab_disk_name         = local.datalab_disk_name
   datalab_enable_swap       = var.datalab_enable_swap
   datalab_docker_image      = var.datalab_docker_image
@@ -73,7 +73,7 @@ resource "google_compute_instance" "main" {
   }
 
   attached_disk {
-    source      = var.existing_disk_name == null ? google_compute_disk.main.0.name : var.existing_disk_name
+    source      = var.create_disk ? google_compute_disk.main.0.name : var.existing_disk_name
     device_name = local.datalab_disk_name
   }
 
@@ -114,12 +114,11 @@ resource "google_compute_instance" "main" {
 
 /******************************************
   Create the persistent data disk
-  Does not create a new disk if an existing_disk_name is set
  *****************************************/
 resource "google_compute_disk" "main" {
   name    = local.datalab_disk_name
   project = var.project_id
-  count   = var.existing_disk_name == null ? 1 : 0
+  count   = var.create_disk ? 1 : 0
   type    = "pd-ssd"
   size    = var.persistent_disk_size_gb
   zone    = var.zone

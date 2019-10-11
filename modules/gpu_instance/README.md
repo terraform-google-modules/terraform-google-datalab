@@ -40,7 +40,7 @@ module "datalab_gpu" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | boot\_disk\_size\_gb | The boot disk size in gb for the Datalab instance | string | `"20"` | no |
-| cloud\_config | The cloud config template to use | string | `"gpu_cloud_config.tpl"` | no |
+| create\_disk | Create a persistent data disk | bool | `"true"` | no |
 | datalab\_console\_log\_level | The log level for which log entries from the Datalab instance will be written to StackDriver logging. Valid choices: (trace,debug,info,warn,error,fatal) | string | `"warn"` | no |
 | datalab\_docker\_image | Datalab docker image to use | string | `"gcr.io/cloud-datalab/datalab-gpu:latest"` | no |
 | datalab\_enable\_backup | Automatically backup the disk contents to Cloud Storage | bool | `"true"` | no |
@@ -64,7 +64,6 @@ module "datalab_gpu" {
 
 | Name | Description |
 |------|-------------|
-| datalab\_docker\_image | The Datalab docker image used |
 | disk\_name | The name of the persistent disk |
 | disk\_size | The size of the persistent disk |
 | firewall\_name | The name of the firewall rule |

@@ -47,7 +47,7 @@ module "vpc" {
 }
 
 /******************************************
-  Adding Cloud NAT
+  Adding Cloud Router
  *****************************************/
 
 resource "google_compute_router" "main" {
@@ -62,7 +62,7 @@ resource "google_compute_router" "main" {
 }
 
 /******************************************
-  Adding Cloud Router
+  Adding Cloud NAT
  *****************************************/
 resource "google_compute_router_nat" "main" {
   name                               = "${module.vpc.network_name}-nat"

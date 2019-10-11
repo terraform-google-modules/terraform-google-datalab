@@ -54,6 +54,12 @@ variable "boot_disk_size_gb" {
   default     = 20
 }
 
+variable "create_disk" {
+  description = "Create a persistent data disk"
+  type        = bool
+  default     = true
+}
+
 variable "persistent_disk_size_gb" {
   description = "The persistent disk size in gb for the Datalab instance"
   type        = number
