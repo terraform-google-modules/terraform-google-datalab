@@ -53,8 +53,3 @@ output "instance_name" {
   description = "The instance name"
   value       = module.datalab.instance_name
 }
-
-output "datalab_docker_image" {
-  description = "The datalab docker image used"
-  value       = module.datalab.datalab_docker_image
-}
