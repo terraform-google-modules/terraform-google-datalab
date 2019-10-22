@@ -1,10 +1,10 @@
-# terraform-google-datalab
+# Google Datalab Terraform Module
 
-This module was generated from [terraform-google-module-template](https://github.com/terraform-google-modules/terraform-google-module-template/), which by default generates a module that simply creates a GCS bucket. As the module develops, this README should be updated.
+Use [Cloud Datalab](https://cloud.google.com/datalab/) to easily explore, visualize, analyze, and transform data using familiar languages, such as Python and SQL, interactively.
 
-The resources/services/activations/deletions that this module will create/trigger are:
+## Compatibility
 
-- Create a GCS bucket with the provided name
+This module is meant for use with Terraform 0.12.
 
 ## Usage
 
@@ -12,32 +12,18 @@ Basic usage of this module is as follows:
 
 ```hcl
 module "datalab" {
-  source  = "terraform-google-modules/datalab/google"
-  version = "~> 0.1"
-
-  project_id  = "<PROJECT ID>"
-  bucket_name = "gcs-test-bucket"
+  source             = "terraform-google-modules/datalab/google//modules/default_instance"
+  version            = "~> 0.1"
+  project_id         = "<PROJECT ID>"
+  zone               = "us-central1-c"
+  datalab_user_email = "<DATALAB USER EMAIL>
+  network_name       = "datalab-network"
+  subnet_name        = "datalab-subnetwork"
 }
 ```
 
 Functional examples are included in the
 [examples](./examples/) directory.
-
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| bucket\_name | The name of the bucket to create | string | n/a | yes |
-| project\_id | The project ID to deploy to | string | n/a | yes |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| bucket\_name |  |
-
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Requirements
 
@@ -52,24 +38,32 @@ The following dependencies must be available:
 
 ### Service Account
 
-A service account with the following roles must be used to provision
+A service account with the following minimum roles must be used to provision
 the resources of this module:
 
-- Storage Admin: `roles/storage.admin`
+- Compute Instance Admin: `roles/compute.instanceAdmin` (create instance)
+- Compute Security Admin: `roles/compute.securityAdmin` (create firewall rule)
+- Service Account User: `roles/iam.serviceAccountUser` (access service account)
 
-The [Project Factory module][project-factory-module] and the
-[IAM module][iam-module] may be used in combination to provision a
-service account with the necessary roles applied.
+If using the examples you will need these additional roles.
+- Compute Network Admin: `roles/compute.networkAdmin` (create VPC)
+
+Advance Example
+- Service Account Admin: `roles/iam.serviceAccountAdmin` (create service account)
+- Projects IAM Admin: `roles/resourcemanager.projectIamAdmin` (set IAM policy on project)
+
+### Service Account for instance
+
+The service account for the datalab instances will need the permission `compute.instances.stop` in order to allow the idle timeout option to shutdown the instance.
 
 ### APIs
 
 A project with the following APIs enabled must be used to host the
 resources of this module:
 
-- Google Cloud Storage JSON API: `storage-api.googleapis.com`
-
-The [Project Factory module][project-factory-module] can be used to
-provision a project with the necessary APIs enabled.
+- Compute Engine API : `compute.googleapis.com`
+- Identity and Access Management API : `iam.googleapis.com`
+- Cloud Resource Manager API: `cloudresourcemanager.googleapis.com`
 
 ## Contributing
 
@@ -80,3 +74,22 @@ information on contributing to this module.
 [project-factory-module]: https://registry.terraform.io/modules/terraform-google-modules/project-factory/google
 [terraform-provider-gcp]: https://www.terraform.io/docs/providers/google/index.html
 [terraform]: https://www.terraform.io/downloads.html
+
+# Access the Cloud Datalab UI
+Setup tunnel to the Datalab UI
+```
+gcloud beta compute start-iap-tunnel INSTANCE_NAME 8080 \
+  --project PROJECT \
+  --zone ZONE \
+  --local-host-port=localhost:8080
+```
+Using your browser go to http://localhost:8080
+
+# GPU instances
+Not all GPU types are supported in all zones. Go here to check which GPU type and zones are supported https://cloud.google.com/compute/docs/gpus/
+
+
+The Datalab GPU instance will take a few more minutes to come up since it needs to install the NVIDIA Accelerated Graphics Driver
+
+To verify that the drivers are installed correctly and the instance has the correct number of GPUs run:
+`/var/lib/nvidia/bin/nvidia-smi`
