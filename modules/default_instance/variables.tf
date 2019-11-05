@@ -102,3 +102,10 @@ variable "datalab_docker_image" {
   description = "Datalab docker image to use"
   default     = "gcr.io/cloud-datalab/datalab:latest"
 }
+
+variable "create_fw_rule" {
+  default     = true
+  description = "Flag to create Firewall rule for SSH access to Datalab"
+  type        = bool
+}
+

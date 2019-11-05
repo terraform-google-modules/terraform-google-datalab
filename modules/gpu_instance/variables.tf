@@ -112,3 +112,10 @@ variable "gpu_type" {
   description = "The GPU type for the Datalab instance"
   default     = "nvidia-tesla-k80"
 }
+
+variable "create_fw_rule" {
+  default     = true
+  description = "Flag to create Firewall rule for SSH access to Datalab"
+  type        = bool
+}
+

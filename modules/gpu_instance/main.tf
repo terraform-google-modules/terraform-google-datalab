@@ -23,6 +23,7 @@ locals {
  *****************************************/
 module "iap_firewall" {
   source               = "../iap_firewall"
+  create_rule          = var.create_fw_rule
   project_id           = var.project_id
   network_name         = var.network_name
   firewall_description = "Allow SSH and web UI IAP tunnel to Datalab instance"
