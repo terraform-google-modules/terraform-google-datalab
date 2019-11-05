@@ -27,6 +27,7 @@ module "datalab" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| append\_to\_startup\_script | Full path to file with content to be added to the startup script. | string | `""` | no |
 | boot\_disk\_size\_gb | The boot disk size in gb for the Datalab instance | string | `"20"` | no |
 | create\_disk | Create a persistent data disk | bool | `"true"` | no |
 | datalab\_console\_log\_level | The log level for which log entries from the Datalab instance will be written to StackDriver logging. Valid choices: (trace,debug,info,warn,error,fatal) | string | `"warn"` | no |

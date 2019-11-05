@@ -15,8 +15,8 @@
  */
 
 output "startup_script" {
-  description = "Rendered start script from template"
-  value       = data.template_file.startup_script.rendered
+  description = "Rendered startup script"
+  value       = local.startup_script_content
 }
 
 output "cloud_config" {

@@ -98,3 +98,9 @@ variable gpu_device_map {
        EOF
   }
 }
+
+variable "append_to_startup_script" {
+  default     = null
+  description = "Full path to file with content to be added to the startup script." 
+  type        = string
+}
