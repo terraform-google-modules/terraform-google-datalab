@@ -36,3 +36,10 @@ variable "ports" {
   description = "A list of ports to which this rule applies"
   type        = list
 }
+
+variable "create_rule" {
+  default     = true
+  description = "Flag to create or skip Firewall rule creation"
+  type        = bool
+}
+

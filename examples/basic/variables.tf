@@ -117,3 +117,10 @@ variable "fluentd_docker_image" {
   description = "Fluentd docker image to use"
   default     = "gcr.io/google-containers/fluentd-gcp:2.0.17"
 }
+
+variable "create_fw_rule" {
+  default     = true
+  description = "Flag to create Firewall rule for SSH access to Datalab"
+  type        = bool
+}
+

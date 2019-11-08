@@ -90,4 +90,5 @@ module "datalab" {
   datalab_user_email = var.datalab_user_email
   network_name       = module.vpc.network_name
   subnet_name        = module.vpc.subnets_self_links[0]
+  create_fw_rule     = var.create_fw_rule
 }

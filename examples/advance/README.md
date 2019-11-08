@@ -43,7 +43,6 @@ Expected variables:
 
 | Name | Description |
 |------|-------------|
-| datalab\_docker\_image | The datalab docker image used |
 | disk\_name | The name of the persistent disk |
 | disk\_size | The size of the persistent disk |
 | firewall\_name | The name of the firewall rule |
