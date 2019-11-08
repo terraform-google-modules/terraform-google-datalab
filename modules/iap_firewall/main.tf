@@ -18,6 +18,7 @@
   Firewall rule to allow tunnel-through-iap
  *****************************************/
 resource "google_compute_firewall" "iap" {
+  count          = var.create_rule ? 1 : 0
   provider       = "google-beta"
   name           = "${var.network_name}-allow-iap"
   project        = var.project_id

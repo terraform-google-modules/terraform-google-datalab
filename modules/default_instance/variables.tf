@@ -108,3 +108,9 @@ variable "append_to_startup_script" {
   description = "Full path to file with content to be added to the startup script."
   type        = string
 }
+
+variable "create_fw_rule" {
+  default     = true
+  description = "Flag to create Firewall rule for SSH access to Datalab"
+  type        = bool
+}

@@ -22,4 +22,5 @@ module "datalab" {
   source             = "../../../examples/basic"
   project_id         = var.project_id
   datalab_user_email = var.datalab_user_email
+  create_fw_rule     = false
 }
