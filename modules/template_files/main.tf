@@ -15,7 +15,7 @@
  */
 
 locals {
-  startup_script_content = var.append_to_startup_script == null ? data.template_file.startup_script.rendered : "${data.template_file.startup_script.rendered}${data.local_file.additional_startup_script[0].content}"
+  startup_script_content = var.append_to_startup_script == null ? data.template_file.startup_script.rendered : "${data.template_file.startup_script.rendered}\n\n${data.local_file.additional_startup_script[0].content}"
 }
 
 /***********************************************
