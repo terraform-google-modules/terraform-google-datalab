@@ -37,6 +37,7 @@ module "iap_firewall" {
 module "template_files" {
   source                    = "../template_files"
   cloud_config              = "default_cloud_config.tpl"
+  append_to_startup_script  = var.append_to_startup_script
   datalab_disk_name         = local.datalab_disk_name
   datalab_enable_swap       = var.datalab_enable_swap
   datalab_docker_image      = var.datalab_docker_image

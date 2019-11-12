@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+locals {
+  startup_script_content = var.append_to_startup_script == null ? data.template_file.startup_script.rendered : "${data.template_file.startup_script.rendered}\n\n${data.local_file.additional_startup_script[0].content}"
+}
+
 /***********************************************
   Template for the startup script
  ***********************************************/
@@ -25,6 +29,14 @@ data "template_file" "startup_script" {
     disk_name            = var.datalab_disk_name
     datalab_enable_swap  = var.datalab_enable_swap
   }
+}
+
+/***********************************************
+  Additiounal content for the startup script
+ ***********************************************/
+data "local_file" "additional_startup_script" {
+  count    = var.append_to_startup_script == null ? 0 : 1
+  filename = var.append_to_startup_script
 }
 
 /***********************************************
