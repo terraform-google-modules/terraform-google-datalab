@@ -14,7 +14,7 @@ and this project adheres to
 ### Added
 
 - `create_fw_rule` variable to toggle creation of the firewall rule. [#4]
-- `append_to_startup_script` variable to add additional, custom logic to the startup script. [#3] 
+- `append_to_startup_script` variable to add additional, custom logic to the startup script. [#3]
 
 ## [0.1.0] - 2019-10-22
 

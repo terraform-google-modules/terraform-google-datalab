@@ -39,7 +39,7 @@ module "datalab_gpu" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| append\_to\_startup\_script | Full path to file with content to be added to the startup script. | string | `""` | no |
+| append\_to\_startup\_script | Full path to file with content to be added to the startup script. | string | `"null"` | no |
 | boot\_disk\_size\_gb | The boot disk size in gb for the Datalab instance | string | `"20"` | no |
 | create\_disk | Create a persistent data disk | bool | `"true"` | no |
 | create\_fw\_rule | Flag to create Firewall rule for SSH access to Datalab | bool | `"true"` | no |
