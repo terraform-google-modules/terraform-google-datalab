@@ -19,5 +19,30 @@ router_name = attribute('router_name')
 nat_name = attribute('nat_name')
 subnet_name = attribute('subnet_name')
 instance_name = attribute('instance_name')
+gpu_count = attribute('gpu_count')
+gpu_type = attribute('gpu_type')
 
 include_controls 'shared'
+
+control "gpu" do
+  title "check gpu"
+
+  # Check to make sure that the gpu type and count are correct for the GPU instance
+  describe command("gcloud compute instances describe #{instance_name} --project #{project_id} --zone #{zone} --format json") do
+    let!(:data) do
+      if subject.exit_status == 0
+        JSON.parse(subject.stdout)
+      else
+        {}
+      end
+    end
+
+    it "check that gpu(s) are set" do
+      expect(data["guestAccelerators"][0]).to include({
+        "acceleratorCount" => attribute('gpu_count'),
+        "acceleratorType" => "https://www.googleapis.com/compute/v1/projects/#{project_id}/zones/#{zone}/acceleratorTypes/#{attribute('gpu_type')}",
+      })
+    end
+  end
+
+end

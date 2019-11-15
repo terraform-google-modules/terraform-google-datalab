@@ -25,7 +25,7 @@ disk_size = attribute('disk_size')
 instance_name = attribute('instance_name')
 
 control "gcp" do
-  title "GCP Resources"
+  title "GCP Shared Resources"
 
   describe google_compute_disk(project: "#{project_id}", name: "#{disk_name}", zone: "#{zone}") do
     it { should exist }

@@ -12,6 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+project_id = attribute('project_id')
+region = attribute('region')
+zone = attribute('zone')
+router_name = attribute('router_name')
+nat_name = attribute('nat_name')
+network_name = attribute('network_name')
+subnet_name = attribute('subnet_name')
+firewall_name = attribute('firewall_name')
+disk_name = attribute('disk_name')
+disk_size = attribute('disk_size')
+instance_name = attribute('instance_name')
+
 include_controls 'shared'
 
 control "gcp" do

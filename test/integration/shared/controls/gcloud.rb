@@ -21,7 +21,7 @@ subnet_name = attribute('subnet_name')
 instance_name = attribute('instance_name')
 
 control "gcloud" do
-  title "gcloud Resources"
+  title "gcloud Shared Resources"
 
   # Start the instance if it is not running. Instances have and idle timeout
   describe command("gcloud compute instances start #{instance_name} --project #{project_id} --zone #{zone}") do
@@ -66,30 +66,6 @@ control "gcloud" do
   end
 
 end
-
-control "gpu" do
-  title "check gpu"
-
-  # Check to make sure that the gpu type and count are correct for the GPU instance
-  describe command("gcloud compute instances describe #{instance_name} --project #{project_id} --zone #{zone} --format json") do
-    let!(:data) do
-      if subject.exit_status == 0
-        JSON.parse(subject.stdout)
-      else
-        {}
-      end
-    end
-
-    it "check that gpu(s) are set" do
-      expect(data["guestAccelerators"][0]).to include({
-        "acceleratorCount" => attribute('gpu_count'),
-        "acceleratorType" => "https://www.googleapis.com/compute/v1/projects/#{project_id}/zones/#{zone}/acceleratorTypes/#{attribute('gpu_type')}",
-      })
-    end
-  end
-
-end
-
 
 # This control is not set to automatically run.  When the instances come up it can take a while before
 # the container comes up and is in a ready state.  It can take longer for the GPU instances because
