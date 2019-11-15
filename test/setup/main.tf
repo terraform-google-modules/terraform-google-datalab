@@ -30,5 +30,7 @@ module "project" {
     "serviceusage.googleapis.com",
     "compute.googleapis.com",
     "iap.googleapis.com",
+    "iam.googleapis.com",
+    "iamcredentials.googleapis.com",
   ]
 }
