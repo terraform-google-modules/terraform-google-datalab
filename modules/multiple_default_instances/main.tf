@@ -125,7 +125,52 @@ resource "google_compute_disk" "main" {
   Create the service account
  *****************************************/
 resource "google_service_account" "datalab_service_account" {
-    for_each = var.create_service_account ? var.datalab_user_emails : toset([])
-    account_id = local.datalab_name[each.key]
-    project = var.project_id
+  for_each   = var.create_service_account ? var.datalab_user_emails : toset([])
+  account_id = local.datalab_name[each.key]
+  project    = var.project_id
+}
+
+/******************************************
+  Allow the user to use the service account
+ *****************************************/
+resource "google_service_account_iam_binding" "datalab_service_account_iam_binding" {
+  for_each           = var.create_service_account ? var.datalab_user_emails : toset([])
+  service_account_id = google_service_account.datalab_service_account[each.key].name
+
+  role    = "roles/iam.serviceAccountUser"
+  members = [
+      "user:${each.key}",
+  ]
+}
+
+
+/******************************************
+  Grant user osLogin to the instance
+ *****************************************/
+resource "google_compute_instance_iam_binding" "osLogin" {
+  for_each       = var.assign_datalab_user_permissions ? var.datalab_user_emails : toset([])
+  instance_name  = local.datalab_name[each.key]
+  project        = var.project_id
+  zone           = var.zone
+  
+  role    = "roles/compute.osLogin"
+  members = [
+      "user:${each.key}",
+  ]
+}
+
+/******************************************
+  Grant user tunnelResourceAccessor to the instance
+ *****************************************/
+resource "google_iap_tunnel_instance_iam_binding" "tunnelResourceAccessor" {
+  for_each = var.assign_datalab_user_permissions ? var.datalab_user_emails : toset([])
+  provider = google-beta
+  instance = local.datalab_name[each.key]
+  project  = var.project_id
+  zone     = var.zone
+  role     = "roles/iap.tunnelResourceAccessor"
+  
+  members = [
+        "user:${each.key}",
+    ]
 }

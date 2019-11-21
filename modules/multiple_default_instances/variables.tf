@@ -123,3 +123,9 @@ variable "create_service_account" {
   type        = bool
   default     = false
 }
+
+variable "assign_datalab_user_permissions" {
+  description = "If true, roles/compute.osLogin and roles/iap.tunnelResourceAccessor will be assigned to the datalab instance for assigned user.  Default is false"
+  type        = bool
+  default     = false
+}
