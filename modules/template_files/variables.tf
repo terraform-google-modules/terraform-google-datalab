@@ -18,8 +18,9 @@ variable "cloud_config" {
   description = "Name of the cloud config template to use"
 }
 
-variable "datalab_disk_name" {
-  description = "Name of the persistent disk to mount to the Datalab instance"
+variable "datalab_disk_names" {
+  description = "Names of the persistent disk to mount to the Datalab instance"
+  type        = map(string)
 }
 
 variable "datalab_docker_image" {
@@ -44,8 +45,9 @@ variable "datalab_console_log_level" {
   default     = "warn"
 }
 
-variable "datalab_user_email" {
-  description = "Create the Datalab instance on behalf of the specified user"
+variable "datalab_user_emails" {
+  description = "Create the Datalab instance on behalf of the specified user(s)"
+  type        = set(string)
 }
 
 variable "datalab_idle_timeout" {
