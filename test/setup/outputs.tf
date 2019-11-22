@@ -23,6 +23,6 @@ output "sa_key" {
   sensitive = true
 }
 
-output "default_service_account_email" {
+output "datalab_service_account_email" {
   value = module.project.service_account_email
 }
