@@ -24,7 +24,7 @@ control "gcloud" do
   title "gcloud Shared Resources"
 
   # Start the instance if it is not running. Instances have and idle timeout
-  describe command("gcloud compute instances start #{instance_name} --project #{project_id} --zone #{zone}") do
+  describe command("gcloud compute instances start #{instance_name} --async --project #{project_id} --zone #{zone}") do
     its(:exit_status) { should eq 0 }
   end
 
