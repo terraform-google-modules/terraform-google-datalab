@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-provider "google" {
-  version = "~> 2.0"
+variable "org_id" {
+  description = "The numeric organization id"
 }
 
-module "datalab" {
-  source             = "../../../examples/basic"
-  project_id         = var.project_id
-  datalab_user_email = var.datalab_user_email
-  create_fw_rule     = false
-  service_account    = var.datalab_service_account_email
+variable "folder_id" {
+  description = "The folder to deploy in"
+}
+
+variable "billing_account" {
+  description = "The billing account id associated with the project, e.g. XXXXXX-YYYYYY-ZZZZZZ"
 }

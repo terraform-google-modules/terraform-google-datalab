@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-provider "google" {
-  version = "~> 2.0"
+terraform {
+  required_version = ">= 0.12"
 }
 
-module "datalab" {
-  source             = "../../../examples/basic"
-  project_id         = var.project_id
-  datalab_user_email = var.datalab_user_email
-  create_fw_rule     = false
-  service_account    = var.datalab_service_account_email
+provider "google" {
+  version = "~> 2.13.0"
+}
+
+provider "google-beta" {
+  version = "~> 2.13.0"
 }

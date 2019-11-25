@@ -6,6 +6,7 @@ Expected variables:
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| datalab\_service\_account\_email | The service account attached to the Datalab instance. If empty the default Google Compute Engine service account is used | string | `"null"` | no |
 | datalab\_user\_email | Create the Datalab instance on behalf of the specified user | string | `"integration-test@google.com"` | no |
 | project\_id | The ID of the project in which to provision resources. | string | n/a | yes |
 | region | The region the network will be created in | string | `"us-central1"` | no |

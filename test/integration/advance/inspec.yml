@@ -3,6 +3,8 @@ depends:
   - name: inspec-gcp
     git: https://github.com/inspec/inspec-gcp.git
     tag: v0.10.0
+  - name: shared
+    path: ../shared
 attributes:
   - name: project_id
     required: true

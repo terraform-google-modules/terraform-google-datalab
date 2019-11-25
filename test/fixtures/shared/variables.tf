@@ -18,6 +18,11 @@ variable "project_id" {
   description = "The ID of the project in which to provision resources."
 }
 
+variable "datalab_service_account_email" {
+  description = "The service account attached to the Datalab instance. If empty the default Google Compute Engine service account is used"
+  default     = null
+}
+
 variable "region" {
   description = "The region the network will be created in"
   default     = "us-central1"
@@ -32,4 +37,3 @@ variable "datalab_user_email" {
   description = "Create the Datalab instance on behalf of the specified user"
   default     = "integration-test@google.com"
 }
-

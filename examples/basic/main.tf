@@ -91,4 +91,5 @@ module "datalab" {
   network_name       = module.vpc.network_name
   subnet_name        = module.vpc.subnets_self_links[0]
   create_fw_rule     = var.create_fw_rule
+  service_account    = var.service_account
 }

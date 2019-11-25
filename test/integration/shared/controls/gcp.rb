@@ -25,18 +25,7 @@ disk_size = attribute('disk_size')
 instance_name = attribute('instance_name')
 
 control "gcp" do
-  title "GCP Resources"
-
-  describe google_compute_firewall(project: "#{project_id}", name: "#{firewall_name}") do
-    it { should exist }
-    its('name') { should eq "#{firewall_name}" }
-    its('direction') { should eq "INGRESS" }
-    it { should_not allow_ip_ranges ["0.0.0.0/0"] }
-    it { should allow_ip_ranges ["35.235.240.0/20"] }
-    it { should allow_port_protocol("8080", "tcp") }
-    it { should allow_port_protocol("22", "tcp") }
-    it { should allow_target_tags ["datalab"] }
-  end
+  title "GCP Shared Resources"
 
   describe google_compute_disk(project: "#{project_id}", name: "#{disk_name}", zone: "#{zone}") do
     it { should exist }

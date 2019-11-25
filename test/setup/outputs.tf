@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-provider "google" {
-  version = "~> 2.0"
+output "project_id" {
+  value = module.project.project_id
 }
 
-module "datalab" {
-  source             = "../../../examples/basic"
-  project_id         = var.project_id
-  datalab_user_email = var.datalab_user_email
-  create_fw_rule     = false
-  service_account    = var.datalab_service_account_email
+output "sa_key" {
+  value     = google_service_account_key.int_test.private_key
+  sensitive = true
+}
+
+output "datalab_service_account_email" {
+  value = module.project.service_account_email
 }
