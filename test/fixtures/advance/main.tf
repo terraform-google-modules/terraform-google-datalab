@@ -22,4 +22,8 @@ module "datalab" {
   source             = "../../../examples/advance"
   project_id         = var.project_id
   datalab_user_email = var.datalab_user_email
+
+  labels = {
+    test_label = "test_value"
+  }
 }

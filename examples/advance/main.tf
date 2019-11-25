@@ -118,4 +118,5 @@ module "datalab" {
   datalab_enable_backup     = var.datalab_enable_backup
   datalab_console_log_level = var.datalab_console_log_level
   datalab_idle_timeout      = var.datalab_idle_timeout
+  labels                    = var.labels
 }

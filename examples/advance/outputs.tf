@@ -63,3 +63,8 @@ output "gpu_type" {
   description = "The gpu type"
   value       = var.gpu_type
 }
+
+output "labels" {
+  description = "A map of key/value label pairs to assigned to the instance."
+  value       = module.datalab.labels
+}

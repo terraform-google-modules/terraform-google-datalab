@@ -46,3 +46,9 @@ attributes:
   - name: gpu_type
     required: true
     type: string
+  - name: test_label_name
+    required: true
+    type: string
+  - name: test_label_value
+    required: true
+    type: string

@@ -39,6 +39,7 @@ module "datalab" {
 | datalab\_user\_email | Create the Datalab instance on behalf of the specified user | string | n/a | yes |
 | existing\_disk\_name | Name of an existing persistent disk you want to use | string | `"null"` | no |
 | fluentd\_docker\_image | Fluentd docker image to use | string | `"gcr.io/google-containers/fluentd-gcp:2.0.17"` | no |
+| labels | A map of key/value label pairs to assign to the instance. | map(string) | `<map>` | no |
 | machine\_type | The machine type for the Datalab instance | string | `"n1-standard-2"` | no |
 | name | The name of the Datalab instance | string | `"datalab"` | no |
 | network\_name | The network the Datalab instance will be in | string | n/a | yes |
@@ -56,5 +57,6 @@ module "datalab" {
 | disk\_size | The size of the persistent disk |
 | firewall\_name | The name of the firewall rule |
 | instance\_name | The instance name |
+| labels | A map of key/value label pairs to assigned to the instance. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

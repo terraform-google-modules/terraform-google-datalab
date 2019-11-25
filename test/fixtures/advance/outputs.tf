@@ -79,3 +79,11 @@ output "gpu_type" {
   description = "The gpu type"
   value       = module.datalab.gpu_type
 }
+
+output "test_label_name" {
+  value = "test_label"
+}
+
+output "test_label_value" {
+  value = "test_value"
+}
