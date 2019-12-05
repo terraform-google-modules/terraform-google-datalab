@@ -53,3 +53,8 @@ output "instance_name" {
   description = "The instance name"
   value       = module.datalab.instance_name
 }
+
+output "labels" {
+  description = "A map of key/value label pairs to assigned to the instance."
+  value       = module.datalab.labels
+}

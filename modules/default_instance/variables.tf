@@ -114,3 +114,9 @@ variable "create_fw_rule" {
   description = "Flag to create Firewall rule for SSH access to Datalab"
   type        = bool
 }
+
+variable "labels" {
+  description = "A map of key/value label pairs to assign to the instance."
+  type        = map(string)
+  default     = {}
+}

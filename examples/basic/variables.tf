@@ -124,3 +124,8 @@ variable "create_fw_rule" {
   type        = bool
 }
 
+variable "labels" {
+  description = "A map of key/value label pairs to assign to the instance."
+  type        = map(string)
+  default     = {}
+}

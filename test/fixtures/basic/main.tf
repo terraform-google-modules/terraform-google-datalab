@@ -24,4 +24,8 @@ module "datalab" {
   datalab_user_email = var.datalab_user_email
   create_fw_rule     = false
   service_account    = var.datalab_service_account_email
+
+  labels = {
+    test_label = "test_value"
+  }
 }

@@ -28,6 +28,24 @@ control "gcloud" do
     its(:exit_status) { should eq 0 }
   end
 
+  # Check to make sure that labels are correct
+  describe command("gcloud compute instances describe #{instance_name} --project #{project_id} --zone #{zone} --format json") do
+    let!(:data) do
+      if subject.exit_status == 0
+        JSON.parse(subject.stdout)
+      else
+        {}
+      end
+    end
+
+    it "check that label is set" do
+      expect(data["labels"]).to include({
+        attribute('test_label_name') => attribute('test_label_value'),
+        "role"                       => "datalab",
+      })
+    end
+  end
+
   # Check to make sure that the cloud router is configured
   describe command("gcloud --project #{project_id} compute routers nats describe #{nat_name} \
   --router #{router_name} --router-region #{region} --format json") do

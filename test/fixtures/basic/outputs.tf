@@ -69,3 +69,11 @@ output "instance_name" {
   description = "The instance name"
   value       = module.datalab.instance_name
 }
+
+output "test_label_name" {
+  value = "test_label"
+}
+
+output "test_label_value" {
+  value = "test_value"
+}

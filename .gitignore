@@ -43,3 +43,5 @@ crash.log
 **/*.tfvars
 
 credentials.json
+
+tfplan

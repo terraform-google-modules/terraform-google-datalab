@@ -66,7 +66,7 @@ variable "gpu_count" {
 
 variable gpu_device_map {
   description = "Cloud config to map the number of gpu devices"
-  type        = map
+  type        = map(string)
   default = {
     gpu_device_0 = ""
 

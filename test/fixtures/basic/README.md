@@ -26,6 +26,8 @@ Expected variables:
 | region | Region |
 | router\_name | Google Cloud Router name |
 | subnet\_name | Subnet name |
+| test\_label\_name |  |
+| test\_label\_value |  |
 | zone | Zone |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

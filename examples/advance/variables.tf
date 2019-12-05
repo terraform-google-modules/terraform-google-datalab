@@ -117,3 +117,9 @@ variable "fluentd_docker_image" {
   description = "Fluentd docker image to use"
   default     = "gcr.io/google-containers/fluentd-gcp:2.0.17"
 }
+
+variable "labels" {
+  description = "A map of key/value label pairs to assign to the instance."
+  type        = map(string)
+  default     = {}
+}

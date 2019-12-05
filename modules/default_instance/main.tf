@@ -60,10 +60,10 @@ resource "google_compute_instance" "main" {
 
   tags = ["datalab"]
 
-  labels = {
+  labels = merge(var.labels, {
     role    = "datalab"
     use_gpu = false
-  }
+  })
 
   boot_disk {
     initialize_params {
