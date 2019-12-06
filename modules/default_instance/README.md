@@ -1,6 +1,6 @@
 # Google Cloud Private Datalab‎ instance
 
-This module allows you to create opinionated Google Cloud Datalab instances.
+This module allows you to create opinionated Google Cloud Datalab CPU instances.
 
 The resources/services/activations/deletions that this module will create/trigger are:
 - Create a firewall rule to allow [Cloud IAP for TCP forwarding](https://cloud.google.com/iap/docs/using-tcp-forwarding)

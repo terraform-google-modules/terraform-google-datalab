@@ -16,25 +16,25 @@
 
 output "firewall_name" {
   description = "The name of the firewall rule"
-  value       = module.iap_firewall.firewall_name
+  value       = module.datalab_instance.firewall_name
 }
 
 output "disk_name" {
   description = "The name of the persistent disk"
-  value       = google_compute_disk.main.0.name
+  value       = module.datalab_instance.disk_name
 }
 
 output "disk_size" {
   description = "The size of the persistent disk"
-  value       = google_compute_disk.main.0.size
+  value       = module.datalab_instance.disk_size
 }
 
 output "instance_name" {
   description = "The instance name"
-  value       = google_compute_instance.main.name
+  value       = module.datalab_instance.instance_name
 }
 
 output "labels" {
   description = "A map of key/value label pairs to assigned to the instance."
-  value       = google_compute_instance.main.labels
+  value       = module.datalab_instance.labels
 }
