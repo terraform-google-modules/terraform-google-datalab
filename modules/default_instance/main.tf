@@ -96,7 +96,7 @@ resource "google_compute_instance" "main" {
 
   shielded_instance_config {
     enable_integrity_monitoring = true
-    enable_secure_boot          = false
+    enable_secure_boot          = true
     enable_vtpm                 = true
   }
 
