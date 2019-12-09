@@ -49,6 +49,7 @@ module "datalab_gpu" {
 | datalab\_enable\_swap | Enable swap on the Datalab instance | bool | `"true"` | no |
 | datalab\_idle\_timeout | Interval after which an idle Datalab instance will shut down. You can specify a mix of days, hours, minutes and seconds using those names or d, h, m and s, for example 1h 30m. Specify 0s to disable | string | `"60m"` | no |
 | datalab\_user\_email | Create the Datalab instance on behalf of the specified user | string | n/a | yes |
+| enable\_secure\_boot | Verify the digital signature of all boot components, and halt the boot process if signature verification fails | bool | `"false"` | no |
 | existing\_disk\_name | Name of an existing persistent disk you want to use | string | `"null"` | no |
 | fluentd\_docker\_image | Fluentd docker image to use | string | `"gcr.io/google-containers/fluentd-gcp:2.0.17"` | no |
 | gpu\_count | Number of GPUs for the Datalab instance. Valid values are: 0, 1, 2, 4, 8 | string | `"0"` | no |
