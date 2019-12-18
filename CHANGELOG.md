@@ -9,6 +9,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [0.4.0] - 2019-12-18
+
+### Added
+
+- The `enable_secure_boot` variable. [#9]
+
 ## [0.3.0] - 2019-12-05
 
 ### Added
@@ -28,11 +34,13 @@ and this project adheres to
 
 - Initial release
 
-[Unreleased]: https://github.com/terraform-google-modules/terraform-google-datalab/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/terraform-google-modules/terraform-google-datalab/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/terraform-google-modules/terraform-google-datalab/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/terraform-google-modules/terraform-google-datalab/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/terraform-google-modules/terraform-google-datalab/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/terraform-google-modules/terraform-google-datalab/releases/tag/v0.1.0
 
+[#9]: https://github.com/terraform-google-modules/terraform-google-datalab/issues/9
 [#7]: https://github.com/terraform-google-modules/terraform-google-datalab/issues/7
 [#4]: https://github.com/terraform-google-modules/terraform-google-datalab/issues/4
 [#3]: https://github.com/terraform-google-modules/terraform-google-datalab/issues/3
