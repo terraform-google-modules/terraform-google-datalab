@@ -123,3 +123,9 @@ variable "labels" {
   type        = map(string)
   default     = {}
 }
+
+variable "enable_secure_boot" {
+  type        = bool
+  description = "Verify the digital signature of all boot components, and halt the boot process if signature verification fails"
+  default     = false
+}
