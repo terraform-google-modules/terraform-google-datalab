@@ -93,4 +93,5 @@ module "datalab" {
   create_fw_rule     = var.create_fw_rule
   service_account    = var.service_account
   labels             = var.labels
+  enable_secure_boot = var.enable_secure_boot
 }

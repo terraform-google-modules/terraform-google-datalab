@@ -27,6 +27,7 @@ Expected variables:
 | datalab\_gpu\_docker\_image | Datalab GPU docker image to use | string | `"gcr.io/cloud-datalab/datalab-gpu:latest"` | no |
 | datalab\_idle\_timeout | Interval after which an idle Datalab instance will shut down. You can specify a mix of days, hours, minutes and seconds using those names or d, h, m and s, for example 1h 30m. Specify 0s to disable | string | `"60m"` | no |
 | datalab\_user\_email | Create the Datalab instance on behalf of the specified user | string | n/a | yes |
+| enable\_secure\_boot | Verify the digital signature of all boot components, and halt the boot process if signature verification fails | bool | `"false"` | no |
 | fluentd\_docker\_image | Fluentd docker image to use | string | `"gcr.io/google-containers/fluentd-gcp:2.0.17"` | no |
 | gpu\_count | Number of GPUs for the Datalab instance. Valid values are: 0, 1, 2, 4, 8 | number | `"0"` | no |
 | gpu\_type | The GPU type for the Datalab instance | string | `"nvidia-tesla-k80"` | no |

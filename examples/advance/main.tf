@@ -120,4 +120,5 @@ module "datalab" {
   datalab_console_log_level = var.datalab_console_log_level
   datalab_idle_timeout      = var.datalab_idle_timeout
   labels                    = var.labels
+  enable_secure_boot        = var.enable_secure_boot
 }
