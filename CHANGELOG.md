@@ -9,9 +9,14 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.0.0] - 2020-01-09
+
+This is a breaking release. See the [upgrade guide](./docs/upgrading_to_v1.0.md) for details.
+
 ### Changed
 
-- Removed submodules `default_instance` and `gpu_instance` in favor of a single, backwards compatible, `instance` module. See `docs/upgrading_to_v1.0.md` for details. [#14]
+- Removed submodules `default_instance` and `gpu_instance` in favor of a single, backwards compatible, `instance` module. [#14]
+
 ## [0.4.0] - 2019-12-18
 
 ### Added
@@ -37,7 +42,8 @@ and this project adheres to
 
 - Initial release
 
-[Unreleased]: https://github.com/terraform-google-modules/terraform-google-datalab/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/terraform-google-modules/terraform-google-datalab/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/terraform-google-modules/terraform-google-datalab/compare/v0.4.0...v1.0.0
 [0.4.0]: https://github.com/terraform-google-modules/terraform-google-datalab/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/terraform-google-modules/terraform-google-datalab/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/terraform-google-modules/terraform-google-datalab/compare/v0.1.0...v0.2.0
