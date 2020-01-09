@@ -13,7 +13,7 @@ Basic usage of this module is as follows:
 ```hcl
 module "datalab" {
   source             = "terraform-google-modules/datalab/google//modules/instance"
-  version            = "~> 0.1"
+  version            = "~> 1.0"
   project_id         = "<PROJECT ID>"
   zone               = "us-central1-c"
   datalab_user_email = "<DATALAB USER EMAIL>
