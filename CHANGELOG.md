@@ -9,6 +9,9 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+- Removed submodules `default_instance` and `gpu_instance` in favor of a single, backwards compatible, `instance` module. See `docs/upgrading_to_v1.0.md` for details. [#14]
 ## [0.4.0] - 2019-12-18
 
 ### Added

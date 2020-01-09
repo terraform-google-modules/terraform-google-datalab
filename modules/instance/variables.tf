@@ -99,8 +99,25 @@ variable "fluentd_docker_image" {
 }
 
 variable "datalab_docker_image" {
-  description = "Datalab docker image to use"
-  default     = "gcr.io/cloud-datalab/datalab:latest"
+  description = "Datalab docker image to use. If not set latest gcr.io/cloud-datalab/datalab or datalab-gpu image will be used"
+  default     = null
+  type        = string
+}
+
+variable "gpu_instance" {
+  description = "Whether or not create GPU instance instead of a CPU instance"
+  default     = false
+  type        = bool
+}
+
+variable "gpu_count" {
+  description = "Number of GPUs for the Datalab instance. Valid values are: 0, 1, 2, 4, 8. Only applicable when gpu_instance is true"
+  default     = 0
+}
+
+variable "gpu_type" {
+  description = "The GPU type for the Datalab instance. Only applicable when gpu_instance is true"
+  default     = "nvidia-tesla-k80"
 }
 
 variable "append_to_startup_script" {

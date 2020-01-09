@@ -16,6 +16,13 @@
 
 locals {
   datalab_disk_name = "${var.name}-pd"
+
+  datalab_cpu_docker_image = "gcr.io/cloud-datalab/datalab:latest"
+  datalab_gpu_docker_image = "gcr.io/cloud-datalab/datalab-gpu:latest"
+  datalab_docker_image     = var.datalab_docker_image == null ? (var.gpu_instance ? local.datalab_gpu_docker_image : local.datalab_cpu_docker_image) : var.datalab_docker_image
+
+  cloud_config        = var.gpu_instance ? "gpu_cloud_config.tpl" : "default_cloud_config.tpl"
+  on_host_maintenance = var.gpu_instance ? "TERMINATE" : "MIGRATE"
 }
 
 /******************************************
@@ -36,11 +43,11 @@ module "iap_firewall" {
  ***********************************************/
 module "template_files" {
   source                    = "../template_files"
-  cloud_config              = "gpu_cloud_config.tpl"
+  cloud_config              = local.cloud_config
   append_to_startup_script  = var.append_to_startup_script
   datalab_disk_name         = local.datalab_disk_name
   datalab_enable_swap       = var.datalab_enable_swap
-  datalab_docker_image      = var.datalab_docker_image
+  datalab_docker_image      = local.datalab_docker_image
   datalab_enable_backup     = var.datalab_enable_backup
   datalab_console_log_level = var.datalab_console_log_level
   datalab_user_email        = var.datalab_user_email
@@ -62,10 +69,9 @@ resource "google_compute_instance" "main" {
   tags = ["datalab"]
 
   labels = merge(var.labels, {
-    role      = "datalab"
-    use_gpu   = true
-    gpu_count = var.gpu_count
-  })
+    role    = "datalab"
+    use_gpu = var.gpu_instance
+  }, var.gpu_instance ? { gpu_count = var.gpu_count } : {})
 
   boot_disk {
     initialize_params {
@@ -104,13 +110,16 @@ resource "google_compute_instance" "main" {
 
   scheduling {
     automatic_restart   = true
-    on_host_maintenance = "TERMINATE"
+    on_host_maintenance = local.on_host_maintenance
     preemptible         = false
   }
 
-  guest_accelerator {
-    count = var.gpu_count
-    type  = var.gpu_type
+  dynamic "guest_accelerator" {
+    for_each = var.gpu_instance ? [true] : []
+    content {
+      count = var.gpu_count
+      type  = var.gpu_type
+    }
   }
 }
 
