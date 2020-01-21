@@ -19,7 +19,7 @@
  *****************************************/
 resource "google_compute_firewall" "iap" {
   count          = var.create_rule ? 1 : 0
-  provider       = "google-beta"
+  provider       = google-beta
   name           = "${var.network_name}-allow-iap"
   project        = var.project_id
   network        = var.network_name
