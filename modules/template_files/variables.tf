@@ -104,3 +104,13 @@ variable "append_to_startup_script" {
   description = "Full path to file with content to be added to the startup script."
   type        = string
 }
+
+variable "private_datalab_registry_info" {
+  type = object({
+    secret_project_id   = string
+    user_secret_id      = string
+    password_secret_id  = string
+    docker_registry_url = string
+  })
+  default = null
+}

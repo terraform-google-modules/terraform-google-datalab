@@ -39,6 +39,26 @@ data "local_file" "additional_startup_script" {
   filename = var.append_to_startup_script
 }
 
+data "google_secret_manager_secret_version" "docker_registry_user" {
+  count    = var.private_datalab_registry_info == null ? 0 : 1
+  provider = google-beta
+  project  = var.private_datalab_registry_info.secret_project_id
+  secret   = var.private_datalab_registry_info.user_secret_id
+}
+
+data "google_secret_manager_secret_version" "docker_registry_password" {
+  count    = var.private_datalab_registry_info == null ? 0 : 1
+  provider = google-beta
+  project  = var.private_datalab_registry_info.secret_project_id
+  secret   = var.private_datalab_registry_info.password_secret_id
+}
+
+locals {
+  docker_registry = var.private_datalab_registry_info == null ? "" : var.private_datalab_registry_info.docker_registry_url
+  docker_user     = var.private_datalab_registry_info == null ? "" : data.google_secret_manager_secret_version.docker_registry_user.secret_data
+  docker_password = var.private_datalab_registry_info == null ? "" : data.google_secret_manager_secret_version.docker_registry_password.secret_data
+}
+
 /***********************************************
   Main cloud config template
  ***********************************************/
@@ -53,5 +73,8 @@ data "template_file" "cloud_config" {
     datalab_idle_timeout      = var.datalab_idle_timeout
     fluentd_docker_image      = var.fluentd_docker_image
     gpu_device                = var.gpu_device_map["gpu_device_${var.gpu_count}"]
+    docker_registry           = local.docker_registry
+    docker_user               = local.docker_user
+    docker_password           = local.docker_password
   }
 }
