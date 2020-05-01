@@ -46,9 +46,9 @@ download_docker_image() {
 
 clone_repo() {
   echo "Creating the datalab directory"
-  mkdir -p $${{MOUNT_DIR}}/content/datalab
+  mkdir -p $${MOUNT_DIR}/content/datalab
   echo "Cloning the repo datalab-notebooks"
-  docker run --rm -v "$${{MOUNT_DIR}}/content:/content" \
+  docker run --rm -v "$${MOUNT_DIR}/content:/content" \
     --entrypoint "/bin/bash" ${datalab_docker_image} \
     gcloud source repos clone datalab-notebooks /content/datalab/notebooks
 }
@@ -60,7 +60,7 @@ repo_is_populated() {
 
 populate_repo() {
   echo "Populating datalab-notebooks repo"
-  docker run --rm -v "$${{MOUNT_DIR}}/content:/content" \
+  docker run --rm -v "$${MOUNT_DIR}/content:/content" \
     --workdir=/content/datalab/notebooks \
     --entrypoint "/bin/bash"  ${datalab_docker_image} -c "\
         echo '.ipynb_checkpoints' >> .gitignore; \
