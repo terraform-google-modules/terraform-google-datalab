@@ -55,8 +55,8 @@ data "google_secret_manager_secret_version" "docker_registry_password" {
 
 locals {
   docker_registry = var.private_datalab_registry_info == null ? "" : var.private_datalab_registry_info.docker_registry_url
-  docker_user     = var.private_datalab_registry_info == null ? "" : data.google_secret_manager_secret_version.docker_registry_user.secret_data
-  docker_password = var.private_datalab_registry_info == null ? "" : data.google_secret_manager_secret_version.docker_registry_password.secret_data
+  docker_user     = var.private_datalab_registry_info == null ? "" : data.google_secret_manager_secret_version.docker_registry_user[0].secret_data
+  docker_password = var.private_datalab_registry_info == null ? "" : data.google_secret_manager_secret_version.docker_registry_password[0].secret_data
 }
 
 /***********************************************
