@@ -30,7 +30,7 @@ chown -R logger /home/logger
 PERSISTENT_DISK_DEV="/dev/disk/by-id/google-${disk_name}"
 MOUNT_DIR="/mnt/disks/datalab-pd"
 MOUNT_CMD="mount -o discard,defaults $${PERSISTENT_DISK_DEV} $${MOUNT_DIR}"
-DOCKER_REGISTRY=${docker_registry}
+DOCKER_REGISTRY="${docker_registry}"
 
 download_docker_image() {
   # Since /root/.docker is not writable on the default image,
@@ -38,7 +38,7 @@ download_docker_image() {
   # directory is used later on by the datalab.service.
   export OLD_HOME=$HOME
   export HOME=/home/datalab
-  if [ -z "$DOCKER_REGISTRY" ]; then
+  if [[ -z "$DOCKER_REGISTRY" ]]; then
     echo "Logging into $${DOCKER_REGISTRY}"
     login_docker_registry
   fi
