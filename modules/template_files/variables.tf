@@ -112,5 +112,4 @@ variable "private_datalab_registry_info" {
     password_secret_id  = string
     docker_registry_url = string
   })
-  default = null
 }
