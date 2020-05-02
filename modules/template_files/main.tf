@@ -21,24 +21,6 @@ locals {
 /***********************************************
   Template for the startup script
  ***********************************************/
-data "template_file" "startup_script" {
-  template = "${file("${path.module}/templates/startup_script.tpl")}"
-
-  vars = {
-    datalab_docker_image = var.datalab_docker_image
-    disk_name            = var.datalab_disk_name
-    datalab_enable_swap  = var.datalab_enable_swap
-  }
-}
-
-/***********************************************
-  Additiounal content for the startup script
- ***********************************************/
-data "local_file" "additional_startup_script" {
-  count    = var.append_to_startup_script == null ? 0 : 1
-  filename = var.append_to_startup_script
-}
-
 data "google_secret_manager_secret_version" "docker_registry_user" {
   count    = var.private_datalab_registry_info == null ? 0 : 1
   provider = google-beta
@@ -59,6 +41,27 @@ locals {
   docker_password = var.private_datalab_registry_info == null ? "" : data.google_secret_manager_secret_version.docker_registry_password[0].secret_data
 }
 
+data "template_file" "startup_script" {
+  template = "${file("${path.module}/templates/startup_script.tpl")}"
+
+  vars = {
+    datalab_docker_image = var.datalab_docker_image
+    disk_name            = var.datalab_disk_name
+    datalab_enable_swap  = var.datalab_enable_swap
+    docker_registry      = local.docker_registry
+    docker_user          = local.docker_user
+    docker_password      = local.docker_password
+  }
+}
+
+/***********************************************
+  Additiounal content for the startup script
+ ***********************************************/
+data "local_file" "additional_startup_script" {
+  count    = var.append_to_startup_script == null ? 0 : 1
+  filename = var.append_to_startup_script
+}
+
 /***********************************************
   Main cloud config template
  ***********************************************/
@@ -73,8 +76,5 @@ data "template_file" "cloud_config" {
     datalab_idle_timeout      = var.datalab_idle_timeout
     fluentd_docker_image      = var.fluentd_docker_image
     gpu_device                = var.gpu_device_map["gpu_device_${var.gpu_count}"]
-    docker_registry           = local.docker_registry
-    docker_user               = local.docker_user
-    docker_password           = local.docker_password
   }
 }
