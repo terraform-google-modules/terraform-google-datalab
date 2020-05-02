@@ -39,7 +39,7 @@ download_docker_image() {
   export OLD_HOME=$HOME
   export HOME=/home/datalab
   if [ -z "$DOCKER_REGISTRY" ]; then
-    echo "Logging into ${DOCKER_REGISTRY}"
+    echo "Logging into $${DOCKER_REGISTRY}"
     login_docker_registry
   fi
   echo "Getting Docker credentials to GCR"
@@ -50,7 +50,7 @@ download_docker_image() {
 }
 
 login_docker_registry() {
-  docker -D login -u ${docker_user} -p ${docker_password} "${DOCKER_REGISTRY}"
+  docker -D login -u ${docker_user} -p ${docker_password} "$${DOCKER_REGISTRY}"
 }
 
 clone_repo() {
