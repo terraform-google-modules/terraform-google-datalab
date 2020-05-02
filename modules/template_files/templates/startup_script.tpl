@@ -38,7 +38,7 @@ download_docker_image() {
   # directory is used later on by the datalab.service.
   export OLD_HOME=$HOME
   export HOME=/home/datalab
-  if [[ -z "$DOCKER_REGISTRY" ]]; then
+  if [[ ! -z "$DOCKER_REGISTRY" ]]; then
     echo "Logging into $${DOCKER_REGISTRY}"
     login_docker_registry
   fi
