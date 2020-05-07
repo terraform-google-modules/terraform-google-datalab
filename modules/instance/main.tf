@@ -42,18 +42,19 @@ module "iap_firewall" {
   Render start up and cloud config scripts from templates
  ***********************************************/
 module "template_files" {
-  source                    = "../template_files"
-  cloud_config              = local.cloud_config
-  append_to_startup_script  = var.append_to_startup_script
-  datalab_disk_name         = local.datalab_disk_name
-  datalab_enable_swap       = var.datalab_enable_swap
-  datalab_docker_image      = local.datalab_docker_image
-  datalab_enable_backup     = var.datalab_enable_backup
-  datalab_console_log_level = var.datalab_console_log_level
-  datalab_user_email        = var.datalab_user_email
-  datalab_idle_timeout      = var.datalab_idle_timeout
-  fluentd_docker_image      = var.fluentd_docker_image
-  gpu_count                 = var.gpu_count
+  source                        = "../template_files"
+  cloud_config                  = local.cloud_config
+  append_to_startup_script      = var.append_to_startup_script
+  datalab_disk_name             = local.datalab_disk_name
+  datalab_enable_swap           = var.datalab_enable_swap
+  datalab_docker_image          = local.datalab_docker_image
+  datalab_enable_backup         = var.datalab_enable_backup
+  datalab_console_log_level     = var.datalab_console_log_level
+  datalab_user_email            = var.datalab_user_email
+  datalab_idle_timeout          = var.datalab_idle_timeout
+  fluentd_docker_image          = var.fluentd_docker_image
+  gpu_count                     = var.gpu_count
+  private_datalab_registry_info = var.private_datalab_registry_info
 }
 
 /***********************************************

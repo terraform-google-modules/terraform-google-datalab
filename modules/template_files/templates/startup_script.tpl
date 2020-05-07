@@ -30,6 +30,7 @@ chown -R logger /home/logger
 PERSISTENT_DISK_DEV="/dev/disk/by-id/google-${disk_name}"
 MOUNT_DIR="/mnt/disks/datalab-pd"
 MOUNT_CMD="mount -o discard,defaults $${PERSISTENT_DISK_DEV} $${MOUNT_DIR}"
+DOCKER_REGISTRY="${docker_registry}"
 
 download_docker_image() {
   # Since /root/.docker is not writable on the default image,
@@ -37,18 +38,26 @@ download_docker_image() {
   # directory is used later on by the datalab.service.
   export OLD_HOME=$HOME
   export HOME=/home/datalab
-  echo "Getting Docker credentials"
+  if [[ ! -z "$DOCKER_REGISTRY" ]]; then
+    echo "Logging into $${DOCKER_REGISTRY}"
+    login_docker_registry
+  fi
+  echo "Getting Docker credentials to GCR"
   docker-credential-gcr configure-docker
   echo "Pulling latest image: ${datalab_docker_image}"
   docker pull ${datalab_docker_image}
   export HOME=$OLD_HOME
 }
 
+login_docker_registry() {
+  docker -D login -u ${docker_user} -p ${docker_password} "$${DOCKER_REGISTRY}"
+}
+
 clone_repo() {
   echo "Creating the datalab directory"
-  mkdir -p $${{MOUNT_DIR}}/content/datalab
+  mkdir -p $${MOUNT_DIR}/content/datalab
   echo "Cloning the repo datalab-notebooks"
-  docker run --rm -v "$${{MOUNT_DIR}}/content:/content" \
+  docker run --rm -v "$${MOUNT_DIR}/content:/content" \
     --entrypoint "/bin/bash" ${datalab_docker_image} \
     gcloud source repos clone datalab-notebooks /content/datalab/notebooks
 }
@@ -60,7 +69,7 @@ repo_is_populated() {
 
 populate_repo() {
   echo "Populating datalab-notebooks repo"
-  docker run --rm -v "$${{MOUNT_DIR}}/content:/content" \
+  docker run --rm -v "$${MOUNT_DIR}/content:/content" \
     --workdir=/content/datalab/notebooks \
     --entrypoint "/bin/bash"  ${datalab_docker_image} -c "\
         echo '.ipynb_checkpoints' >> .gitignore; \

@@ -143,3 +143,13 @@ variable "enable_secure_boot" {
   description = "Verify the digital signature of all boot components, and halt the boot process if signature verification fails"
   default     = false
 }
+
+variable "private_datalab_registry_info" {
+  type = object({
+    secret_project_id   = string
+    user_secret_id      = string
+    password_secret_id  = string
+    docker_registry_url = string
+  })
+  default = null
+}

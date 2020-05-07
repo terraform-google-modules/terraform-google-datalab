@@ -21,6 +21,26 @@ locals {
 /***********************************************
   Template for the startup script
  ***********************************************/
+data "google_secret_manager_secret_version" "docker_registry_user" {
+  count    = var.private_datalab_registry_info == null ? 0 : 1
+  provider = google-beta
+  project  = var.private_datalab_registry_info.secret_project_id
+  secret   = var.private_datalab_registry_info.user_secret_id
+}
+
+data "google_secret_manager_secret_version" "docker_registry_password" {
+  count    = var.private_datalab_registry_info == null ? 0 : 1
+  provider = google-beta
+  project  = var.private_datalab_registry_info.secret_project_id
+  secret   = var.private_datalab_registry_info.password_secret_id
+}
+
+locals {
+  docker_registry = var.private_datalab_registry_info == null ? "" : var.private_datalab_registry_info.docker_registry_url
+  docker_user     = var.private_datalab_registry_info == null ? "" : data.google_secret_manager_secret_version.docker_registry_user[0].secret_data
+  docker_password = var.private_datalab_registry_info == null ? "" : data.google_secret_manager_secret_version.docker_registry_password[0].secret_data
+}
+
 data "template_file" "startup_script" {
   template = "${file("${path.module}/templates/startup_script.tpl")}"
 
@@ -28,6 +48,9 @@ data "template_file" "startup_script" {
     datalab_docker_image = var.datalab_docker_image
     disk_name            = var.datalab_disk_name
     datalab_enable_swap  = var.datalab_enable_swap
+    docker_registry      = local.docker_registry
+    docker_user          = local.docker_user
+    docker_password      = local.docker_password
   }
 }
 
