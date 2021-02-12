@@ -45,12 +45,12 @@ module "template_files" {
   source                    = "../template_files"
   cloud_config              = local.cloud_config
   append_to_startup_script  = var.append_to_startup_script
-  datalab_disk_name         = local.datalab_disk_name
+  datalab_disk_names        = { (var.datalab_user_email) = local.datalab_disk_name }
   datalab_enable_swap       = var.datalab_enable_swap
   datalab_docker_image      = local.datalab_docker_image
   datalab_enable_backup     = var.datalab_enable_backup
   datalab_console_log_level = var.datalab_console_log_level
-  datalab_user_email        = var.datalab_user_email
+  datalab_user_emails       = toset([var.datalab_user_email])
   datalab_idle_timeout      = var.datalab_idle_timeout
   fluentd_docker_image      = var.fluentd_docker_image
   gpu_count                 = var.gpu_count
@@ -92,10 +92,10 @@ resource "google_compute_instance" "main" {
   metadata = {
     enable-oslogin = "TRUE"
     for-user       = var.datalab_user_email
-    user-data      = module.template_files.cloud_config
+    user-data      = module.template_files.cloud_config[var.datalab_user_email]
   }
 
-  metadata_startup_script = module.template_files.startup_script
+  metadata_startup_script = module.template_files.startup_script[var.datalab_user_email]
 
   service_account {
     email  = var.service_account

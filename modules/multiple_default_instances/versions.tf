@@ -14,12 +14,6 @@
  * limitations under the License.
  */
 
-output "startup_script" {
-  description = "Rendered startup script"
-  value       = zipmap(sort(var.datalab_user_emails), sort(values(local.startup_script_content)[*]))
-}
-
-output "cloud_config" {
-  description = "Rendered cloud config from template"
-  value       = zipmap(sort(var.datalab_user_emails), sort(values(data.template_file.cloud_config)[*]["rendered"]))
+terraform {
+  required_version = ">= 0.12"
 }
