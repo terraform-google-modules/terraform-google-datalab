@@ -3,8 +3,10 @@
 Use [Cloud Datalab](https://cloud.google.com/datalab/) to easily explore, visualize, analyze, and transform data using familiar languages, such as Python and SQL, interactively.
 
 ## Compatibility
-
-This module is meant for use with Terraform 0.12.
+This module is meant for use with Terraform 0.13. If you haven't
+[upgraded](https://www.terraform.io/upgrade-guides/0-13.html) and need a Terraform
+0.12.x-compatible version of this module, the last released version
+intended for Terraform 0.12.x is [v1.0.0](https://registry.terraform.io/modules/terraform-google-modules/-datalab/google/v1.0.0).
 
 ## Usage
 
@@ -33,7 +35,7 @@ These sections describe requirements for using this module.
 
 The following dependencies must be available:
 
-- [Terraform][terraform] v0.12
+- [Terraform](https://www.terraform.io/downloads.html) >= 0.13.0
 - [Terraform Provider for GCP][terraform-provider-gcp] plugin v2.0
 
 ### Service Account
