@@ -45,3 +45,6 @@ crash.log
 credentials.json
 
 tfplan
+
+# tf lock file
+.terraform.lock.hcl

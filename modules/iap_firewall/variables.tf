@@ -29,12 +29,12 @@ variable "firewall_description" {
 
 variable "target_tags" {
   description = "A list of instance tags indicating sets of instances located in the network that may make network connections as specified"
-  type        = list
+  type        = list(any)
 }
 
 variable "ports" {
   description = "A list of ports to which this rule applies"
-  type        = list
+  type        = list(any)
 }
 
 variable "create_rule" {
