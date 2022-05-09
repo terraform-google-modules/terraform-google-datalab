@@ -7,6 +7,13 @@ The format is based on
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### [1.0.1](https://github.com/terraform-google-modules/terraform-google-datalab/compare/v1.0.0...v1.0.1) (2022-05-09)
+
+
+### Bug Fixes
+
+* remove deprecated provider quoting. ([#20](https://github.com/terraform-google-modules/terraform-google-datalab/issues/20)) ([9946698](https://github.com/terraform-google-modules/terraform-google-datalab/commit/9946698ded2b386cfc1e605f8040d0fdd69e946b))
+
 ## [Unreleased]
 
 ## [1.0.0] - 2020-01-09
