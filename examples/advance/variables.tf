@@ -38,11 +38,6 @@ variable "network_name" {
   default     = "datalab-network"
 }
 
-variable "service_account" {
-  description = "The service account attached to the Datalab instance. If empty the default Google Compute Engine service account is used"
-  default     = null
-}
-
 variable "machine_type" {
   description = "The machine type for the Datalab instance"
   default     = "n1-standard-2"
@@ -52,12 +47,6 @@ variable "boot_disk_size_gb" {
   description = "The boot disk size in gb for the Datalab instance"
   type        = number
   default     = 20
-}
-
-variable "create_disk" {
-  description = "Create a persistent data disk"
-  type        = bool
-  default     = true
 }
 
 variable "persistent_disk_size_gb" {
@@ -75,11 +64,6 @@ variable "gpu_count" {
 variable "gpu_type" {
   description = "The GPU type for the Datalab instance"
   default     = "nvidia-tesla-k80"
-}
-
-variable "datalab_docker_image" {
-  description = "Datalab docker image to use"
-  default     = "gcr.io/cloud-datalab/datalab:latest"
 }
 
 variable "datalab_gpu_docker_image" {

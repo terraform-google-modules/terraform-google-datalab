@@ -1,0 +1,130 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: blueprints.cloud.google.com/v1alpha1
+kind: BlueprintMetadata
+metadata:
+  name: terraform-google-datalab
+  annotations:
+    config.kubernetes.io/local-config: "true"
+spec:
+  title: Google Cloud Private Datalab‎ Template Files
+  source:
+    repo: https://github.com/terraform-google-modules/terraform-google-datalab.git
+    sourceType: git
+  actuationTool:
+    type: Terraform
+    version: '>= 0.13'
+  examples:
+  - name: advance
+    location: examples/advance
+  - name: basic
+    location: examples/basic
+  variables:
+  - name: append_to_startup_script
+    description: Full path to file with content to be added to the startup script.
+    type: string
+    required: false
+  - name: cloud_config
+    description: Name of the cloud config template to use
+    type: string
+    required: true
+  - name: datalab_console_log_level
+    description: 'The log level for which log entries from the Datalab instance will be written to StackDriver logging. Valid choices: (trace,debug,info,warn,error,fatal)'
+    type: string
+    default: warn
+    required: false
+  - name: datalab_disk_name
+    description: Name of the persistent disk to mount to the Datalab instance
+    type: string
+    required: true
+  - name: datalab_docker_image
+    description: Datalab docker image to use
+    type: string
+    default: gcr.io/cloud-datalab/datalab:latest
+    required: false
+  - name: datalab_enable_backup
+    description: Automatically backup the disk contents to Cloud Storage
+    type: bool
+    default: true
+    required: false
+  - name: datalab_enable_swap
+    description: Enable swap on the Datalab instance
+    type: bool
+    default: true
+    required: false
+  - name: datalab_idle_timeout
+    description: Interval after which an idle Datalab instance will shut down. You can specify a mix of days, hours, minutes and seconds using those names or d, h, m and s, for example 1h 30m. Specify 0s to disable
+    type: string
+    default: 60m
+    required: false
+  - name: datalab_user_email
+    description: Create the Datalab instance on behalf of the specified user
+    type: string
+    required: true
+  - name: fluentd_docker_image
+    description: Fluentd docker image to use
+    type: string
+    default: gcr.io/google-containers/fluentd-gcp:2.0.17
+    required: false
+  - name: gpu_count
+    description: 'Number of GPUs for the Datalab instance. Valid values are: 0, 1, 2, 4, 8'
+    type: number
+    default: 0
+    required: false
+  - name: gpu_device_map
+    description: Cloud config to map the number of gpu devices
+    type: map(string)
+    default:
+      gpu_device_0: ""
+      gpu_device_1: |2
+               --device /dev/nvidia0:/dev/nvidia0 \
+      gpu_device_2: |2
+               --device /dev/nvidia0:/dev/nvidia0 \
+               --device /dev/nvidia1:/dev/nvidia1 \
+      gpu_device_4: |2
+               --device /dev/nvidia0:/dev/nvidia0 \
+               --device /dev/nvidia1:/dev/nvidia1 \
+               --device /dev/nvidia2:/dev/nvidia2 \
+               --device /dev/nvidia3:/dev/nvidia3 \
+      gpu_device_8: |2
+               --device /dev/nvidia0:/dev/nvidia0 \
+               --device /dev/nvidia1:/dev/nvidia1 \
+               --device /dev/nvidia2:/dev/nvidia2 \
+               --device /dev/nvidia3:/dev/nvidia3 \
+               --device /dev/nvidia4:/dev/nvidia4 \
+               --device /dev/nvidia5:/dev/nvidia5 \
+               --device /dev/nvidia6:/dev/nvidia6 \
+               --device /dev/nvidia7:/dev/nvidia7 \
+    required: false
+  outputs:
+  - name: cloud_config
+    description: Rendered cloud config from template
+  - name: startup_script
+    description: Rendered startup script
+  roles:
+  - level: Project
+    roles:
+    - roles/compute.admin
+    - roles/iam.serviceAccountUser
+    - roles/iam.serviceAccountAdmin
+    - roles/resourcemanager.projectIamAdmin
+  services:
+  - cloudresourcemanager.googleapis.com
+  - storage-api.googleapis.com
+  - serviceusage.googleapis.com
+  - compute.googleapis.com
+  - iap.googleapis.com
+  - iam.googleapis.com
+  - iamcredentials.googleapis.com

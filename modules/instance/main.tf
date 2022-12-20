@@ -81,7 +81,7 @@ resource "google_compute_instance" "main" {
   }
 
   attached_disk {
-    source      = var.create_disk ? google_compute_disk.main.0.name : var.existing_disk_name
+    source      = var.create_disk ? google_compute_disk.main[0].name : var.existing_disk_name
     device_name = local.datalab_disk_name
   }
 

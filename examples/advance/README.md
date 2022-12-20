@@ -19,9 +19,7 @@ Expected variables:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | boot\_disk\_size\_gb | The boot disk size in gb for the Datalab instance | `number` | `20` | no |
-| create\_disk | Create a persistent data disk | `bool` | `true` | no |
 | datalab\_console\_log\_level | The log level for which log entries from the Datalab instance will be written to StackDriver logging. Valid choices: (trace,debug,info,warn,error,fatal) | `string` | `"warn"` | no |
-| datalab\_docker\_image | Datalab docker image to use | `string` | `"gcr.io/cloud-datalab/datalab:latest"` | no |
 | datalab\_enable\_backup | Automatically backup the disk contents to Cloud Storage | `bool` | `true` | no |
 | datalab\_enable\_swap | Enable swap on the Datalab instance | `bool` | `true` | no |
 | datalab\_gpu\_docker\_image | Datalab GPU docker image to use | `string` | `"gcr.io/cloud-datalab/datalab-gpu:latest"` | no |
@@ -38,7 +36,6 @@ Expected variables:
 | persistent\_disk\_size\_gb | The persistent disk size in gb for the Datalab instance | `number` | `200` | no |
 | project\_id | The project ID used for the Datalab instance | `any` | n/a | yes |
 | region | The region the network will be created in | `string` | `"us-central1"` | no |
-| service\_account | The service account attached to the Datalab instance. If empty the default Google Compute Engine service account is used | `any` | `null` | no |
 | zone | The zone the Datalab instance will be deployed to | `string` | `"us-central1-c"` | no |
 
 ## Outputs

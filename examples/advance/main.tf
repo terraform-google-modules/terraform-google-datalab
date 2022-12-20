@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-provider "google" {
-  version = "~> 3.53"
-}
-
 locals {
   network_name = "${var.network_name}-advance"
   subnet_name  = "${local.network_name}-subnet"
@@ -29,7 +25,7 @@ locals {
  *****************************************/
 module "vpc" {
   source       = "terraform-google-modules/network/google"
-  version      = "~> 3.0"
+  version      = "~> 6.0"
   project_id   = var.project_id
   network_name = local.network_name
 
@@ -42,7 +38,7 @@ module "vpc" {
   ]
 
   secondary_ranges = {
-    "${local.subnet_name}" = []
+    "local.subnet_name" = []
   }
 }
 

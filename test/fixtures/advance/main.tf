@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-provider "google" {
-  version = "~> 3.53"
-}
-
 module "datalab" {
   source             = "../../../examples/advance"
   project_id         = var.project_id
