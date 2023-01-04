@@ -36,7 +36,7 @@ These sections describe requirements for using this module.
 The following dependencies must be available:
 
 - [Terraform](https://www.terraform.io/downloads.html) >= 0.13.0
-- [Terraform Provider for GCP][terraform-provider-gcp] plugin v2.0
+- [Terraform Provider for GCP][terraform-provider-gcp] plugin >= 3.53
 
 ### Service Account
 
