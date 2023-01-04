@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-provider "google" {
-  version = "~> 2.0"
-}
-
 module "datalab" {
   source             = "../../../examples/basic"
   project_id         = var.project_id

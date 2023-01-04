@@ -22,7 +22,7 @@ locals {
   Template for the startup script
  ***********************************************/
 data "template_file" "startup_script" {
-  template = "${file("${path.module}/templates/startup_script.tpl")}"
+  template = file("${path.module}/templates/startup_script.tpl")
 
   vars = {
     datalab_docker_image = var.datalab_docker_image
@@ -43,7 +43,7 @@ data "local_file" "additional_startup_script" {
   Main cloud config template
  ***********************************************/
 data "template_file" "cloud_config" {
-  template = "${file("${path.module}/templates/${var.cloud_config}")}"
+  template = file("${path.module}/templates/${var.cloud_config}")
 
   vars = {
     datalab_docker_image      = var.datalab_docker_image

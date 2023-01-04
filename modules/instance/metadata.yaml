@@ -1,0 +1,177 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: blueprints.cloud.google.com/v1alpha1
+kind: BlueprintMetadata
+metadata:
+  name: terraform-google-datalab
+  annotations:
+    config.kubernetes.io/local-config: "true"
+spec:
+  title: Google Cloud Private Datalab‎ instance
+  source:
+    repo: https://github.com/terraform-google-modules/terraform-google-datalab.git
+    sourceType: git
+  version: 1.0.0
+  actuationTool:
+    type: Terraform
+    version: '>= 0.13'
+  examples:
+  - name: advance
+    location: examples/advance
+  - name: basic
+    location: examples/basic
+  variables:
+  - name: append_to_startup_script
+    description: Full path to file with content to be added to the startup script.
+    type: string
+    required: false
+  - name: boot_disk_size_gb
+    description: The boot disk size in gb for the Datalab instance
+    type: number
+    default: 20
+    required: false
+  - name: create_disk
+    description: Create a persistent data disk
+    type: bool
+    default: true
+    required: false
+  - name: create_fw_rule
+    description: Flag to create Firewall rule for SSH access to Datalab
+    type: bool
+    default: true
+    required: false
+  - name: datalab_console_log_level
+    description: 'The log level for which log entries from the Datalab instance will be written to StackDriver logging. Valid choices: (trace,debug,info,warn,error,fatal)'
+    type: string
+    default: warn
+    required: false
+  - name: datalab_docker_image
+    description: Datalab docker image to use. If not set latest gcr.io/cloud-datalab/datalab or datalab-gpu image will be used
+    type: string
+    required: false
+  - name: datalab_enable_backup
+    description: Automatically backup the disk contents to Cloud Storage
+    type: bool
+    default: true
+    required: false
+  - name: datalab_enable_swap
+    description: Enable swap on the Datalab instance
+    type: bool
+    default: true
+    required: false
+  - name: datalab_idle_timeout
+    description: Interval after which an idle Datalab instance will shut down. You can specify a mix of days, hours, minutes and seconds using those names or d, h, m and s, for example 1h 30m. Specify 0s to disable
+    type: string
+    default: 60m
+    required: false
+  - name: datalab_user_email
+    description: Create the Datalab instance on behalf of the specified user
+    type: string
+    required: true
+  - name: enable_secure_boot
+    description: Verify the digital signature of all boot components, and halt the boot process if signature verification fails
+    type: bool
+    default: false
+    required: false
+  - name: existing_disk_name
+    description: Name of an existing persistent disk you want to use
+    type: string
+    required: false
+  - name: fluentd_docker_image
+    description: Fluentd docker image to use
+    type: string
+    default: gcr.io/google-containers/fluentd-gcp:2.0.17
+    required: false
+  - name: gpu_count
+    description: 'Number of GPUs for the Datalab instance. Valid values are: 0, 1, 2, 4, 8. Only applicable when gpu_instance is true'
+    type: number
+    default: 0
+    required: false
+  - name: gpu_instance
+    description: Whether or not create GPU instance instead of a CPU instance
+    type: bool
+    default: false
+    required: false
+  - name: gpu_type
+    description: The GPU type for the Datalab instance. Only applicable when gpu_instance is true
+    type: string
+    default: nvidia-tesla-k80
+    required: false
+  - name: labels
+    description: A map of key/value label pairs to assign to the instance.
+    type: map(string)
+    default: {}
+    required: false
+  - name: machine_type
+    description: The machine type for the Datalab instance
+    type: string
+    default: n1-standard-2
+    required: false
+  - name: name
+    description: The name of the Datalab instance
+    type: string
+    default: datalab
+    required: false
+  - name: network_name
+    description: The network the Datalab instance will be in
+    type: string
+    required: true
+  - name: persistent_disk_size_gb
+    description: The persistent disk size in gb for the Datalab instance
+    type: number
+    default: 200
+    required: false
+  - name: project_id
+    description: The project ID used for the Datalab instance
+    type: string
+    required: true
+  - name: service_account
+    description: The service account attached to the Datalab instance. If empty the default Google Compute Engine service account is used
+    type: string
+    required: false
+  - name: subnet_name
+    description: The subnet the Datalab instance will be in
+    type: string
+    required: true
+  - name: zone
+    description: The zone the Datalab instance will be deployed to
+    type: string
+    required: true
+  outputs:
+  - name: disk_name
+    description: The name of the persistent disk
+  - name: disk_size
+    description: The size of the persistent disk
+  - name: firewall_name
+    description: The name of the firewall rule
+  - name: instance_name
+    description: The instance name
+  - name: labels
+    description: A map of key/value label pairs to assigned to the instance.
+  roles:
+  - level: Project
+    roles:
+    - roles/compute.admin
+    - roles/iam.serviceAccountUser
+    - roles/iam.serviceAccountAdmin
+    - roles/resourcemanager.projectIamAdmin
+  services:
+  - cloudresourcemanager.googleapis.com
+  - storage-api.googleapis.com
+  - serviceusage.googleapis.com
+  - compute.googleapis.com
+  - iap.googleapis.com
+  - iam.googleapis.com
+  - iamcredentials.googleapis.com

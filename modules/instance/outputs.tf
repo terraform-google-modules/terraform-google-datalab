@@ -21,12 +21,12 @@ output "firewall_name" {
 
 output "disk_name" {
   description = "The name of the persistent disk"
-  value       = google_compute_disk.main.0.name
+  value       = google_compute_disk.main[0].name
 }
 
 output "disk_size" {
   description = "The size of the persistent disk"
-  value       = google_compute_disk.main.0.size
+  value       = google_compute_disk.main[0].size
 }
 
 output "instance_name" {
