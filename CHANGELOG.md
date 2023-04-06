@@ -7,6 +7,17 @@ The format is based on
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0](https://github.com/terraform-google-modules/terraform-google-datalab/compare/v1.0.1...v2.0.0) (2023-04-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* add Terraform 0.13 constraint and module attribution ([#25](https://github.com/terraform-google-modules/terraform-google-datalab/issues/25))
+
+### Features
+
+* add Terraform 0.13 constraint and module attribution ([#25](https://github.com/terraform-google-modules/terraform-google-datalab/issues/25)) ([28cafb4](https://github.com/terraform-google-modules/terraform-google-datalab/commit/28cafb4a6d40249394d6bbbbd8f406f6fd1b8f04))
+
 ### [1.0.1](https://github.com/terraform-google-modules/terraform-google-datalab/compare/v1.0.0...v1.0.1) (2022-05-09)
 
 
