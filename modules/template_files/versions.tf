@@ -27,8 +27,8 @@ terraform {
       version = "~> 2.0"
     }
     template = {
-      source  = "hashicorp/template"
-      version = "~> 2.0"
+      source  = "hashicorp/template" # TODO: this provider is deprecated, replace with terraform 0.13+ templatefile function
+      version = "2.2.0"
     }
   }
 }
