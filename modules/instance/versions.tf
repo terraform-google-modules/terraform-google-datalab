@@ -20,15 +20,15 @@ terraform {
 
     google = {
       source  = "hashicorp/google"
-      version = ">= 3.53, < 5.0"
+      version = ">= 3.53, < 6"
     }
     null = {
       source  = "hashicorp/null"
       version = ">= 2.0"
     }
     template = {
-      source  = "hashicorp/template"
-      version = "~> 2.0"
+      source  = "hashicorp/template" # TODO: this provider is deprecated, replace with terraform 0.13+ templatefile function
+      version = "2.2.0"
     }
   }
 
