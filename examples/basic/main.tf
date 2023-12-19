@@ -79,7 +79,8 @@ resource "google_compute_router_nat" "main" {
   Create a default Datalab instance
  *****************************************/
 module "datalab" {
-  source             = "../../modules/instance"
+  source             = "terraform-google-modules/datalab/google//modules/instance"
+  version            = "~> 2.0"
   project_id         = var.project_id
   name               = var.name
   zone               = var.zone
