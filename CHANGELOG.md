@@ -7,6 +7,13 @@ The format is based on
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1](https://github.com/terraform-google-modules/terraform-google-datalab/compare/v2.0.0...v2.0.1) (2024-04-11)
+
+
+### Bug Fixes
+
+* upgraded versions.tf to include minor bumps from tpg v5 ([#47](https://github.com/terraform-google-modules/terraform-google-datalab/issues/47)) ([63dcd28](https://github.com/terraform-google-modules/terraform-google-datalab/commit/63dcd2806a1a96ed89115ba88ba5273ada389787))
+
 ## [2.0.0](https://github.com/terraform-google-modules/terraform-google-datalab/compare/v1.0.1...v2.0.0) (2023-04-06)
 
 
